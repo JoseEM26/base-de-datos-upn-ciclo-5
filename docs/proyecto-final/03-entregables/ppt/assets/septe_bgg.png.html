@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Análisis del Entorno (SEPTE) — BGG</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Arial, 'Segoe UI', sans-serif;
+    background-color: #FFFFFF;
+    color: #0B1B3D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px;
+  }
+  .infographic-container {
+    width: 1680px;
+    background: #FFFFFF;
+    border-radius: 26px;
+    padding: 40px 46px;
+    box-shadow: 0 16px 44px rgba(11, 27, 61, 0.08);
+    border: 1px solid #ECEEF2;
+  }
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #F0F2F5;
+    padding-bottom: 18px;
+  }
+  .header-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .badge {
+    align-self: flex-start;
+    background-color: #0B1B3D;
+    color: #FFC000;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+  .title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    font-size: 16.5px;
+    color: #666666;
+    font-weight: 400;
+  }
+  .tag-status {
+    background: #FFF3CC;
+    border: 1.5px solid #FFC000;
+    color: #0B1B3D;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(255, 192, 0, 0.15);
+  }
+
+  /* 5 Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .septe-card {
+    background: #FFFFFF;
+    border-radius: 18px;
+    padding: 26px 20px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1.5px solid #EAECEF;
+    box-shadow: 0 8px 24px rgba(11, 27, 61, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .septe-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+  }
+  
+  /* Alternating Card Top Highlights */
+  .card-gold::before {
+    background: #FFC000;
+  }
+  .card-gold {
+    border-top: 2px solid #FFC000;
+  }
+  .card-navy::before {
+    background: #0B1B3D;
+  }
+  .card-navy {
+    border-top: 2px solid #0B1B3D;
+  }
+
+  /* Dimension Pill */
+  .dimension-pill {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .pill-gold {
+    background-color: #FFF3CC;
+    color: #946B00;
+    border: 1px solid #FFC000;
+  }
+  .pill-navy {
+    background-color: #EBF0F8;
+    color: #0B1B3D;
+    border: 1px solid #0B1B3D;
+  }
+
+  /* Icon Wrapper */
+  .icon-wrapper {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    margin-bottom: 14px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.04);
+  }
+  .icon-gold {
+    background-color: #FFF9E6;
+    border: 1.5px solid rgba(255, 192, 0, 0.4);
+  }
+  .icon-navy {
+    background-color: #F0F4FA;
+    border: 1.5px solid rgba(11, 27, 61, 0.25);
+  }
+
+  /* Card Headings */
+  .card-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0B1B3D;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  .card-desc {
+    font-size: 14.5px;
+    color: #555555;
+    line-height: 1.45;
+    font-weight: 450;
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+  .card-desc strong {
+    color: #0B1B3D;
+  }
+
+  /* Impact Tag */
+  .impact-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0B1B3D;
+    background-color: #F4F6F9;
+    padding: 6px 12px;
+    border-radius: 8px;
+    width: 100%;
+    border-left: 3px solid #FFC000;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Wide Banner */
+  .highlight-banner {
+    background-color: #FFF3CC;
+    border: 2px solid #FFC000;
+    border-radius: 16px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 8px 24px rgba(255, 192, 0, 0.14);
+  }
+  .banner-icon-box {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    background-color: #FFC000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(255, 192, 0, 0.35);
+  }
+  .banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .banner-tag {
+    font-size: 12px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .banner-text {
+    font-size: 15px;
+    color: #222222;
+    line-height: 1.4;
+  }
+  .banner-text strong {
+    color: #0B1B3D;
+  }
+</style>
+</head>
+<body>
+
+<div class="infographic-container">
+  
+  <!-- Header Section -->
+  <div class="header-section">
+    <div class="header-titles">
+      <span class="badge">DIAGNÓSTICO ESTRATÉGICO</span>
+      <h1 class="title">Análisis del Entorno (SEPTE) — BGG</h1>
+      <p class="subtitle">Factores externos clave que condicionan la operatoria crediticia y demandan una modernización transaccional</p>
+    </div>
+    <div class="tag-status">
+      <span>🏛️ Microfinanzas BGG</span>
+    </div>
+  </div>
+
+  <!-- 5 SEPTE Cards -->
+  <div class="cards-grid">
+
+    <!-- 1. SOCIAL -->
+    <div class="septe-card card-gold">
+      <div class="dimension-pill pill-gold">S • SOCIAL</div>
+      <div class="icon-wrapper icon-gold">🧑‍🤝‍🧑</div>
+      <h2 class="card-title">Social</h2>
+      <p class="card-desc">
+        <strong>Alta vulnerabilidad financiera</strong> e informalidad crediticia generalizada en microcomerciantes.
+      </p>
+      <div class="impact-tag">
+        <span>📍</span> Inclusión y formalización
+      </div>
+    </div>
+
+    <!-- 2. ECONÓMICO -->
+    <div class="septe-card card-navy">
+      <div class="dimension-pill pill-navy">E • ECONÓMICO</div>
+      <div class="icon-wrapper icon-navy">💰</div>
+      <h2 class="card-title">Económico</h2>
+      <p class="card-desc">
+        <strong>Tasas de interés >1,400% anual</strong>; necesidad crítica de control de mora y saldos diarios.
+      </p>
+      <div class="impact-tag" style="border-left-color: #0B1B3D;">
+        <span>📈</span> Control estricto de mora
+      </div>
+    </div>
+
+    <!-- 3. POLÍTICO / LEGAL -->
+    <div class="septe-card card-gold">
+      <div class="dimension-pill pill-gold">P • POLÍTICO / LEGAL</div>
+      <div class="icon-wrapper icon-gold">⚖️</div>
+      <h2 class="card-title">Político / Legal</h2>
+      <p class="card-desc">
+        <strong>Tipificación de usura extorsiva</strong> (Código Penal 2023) y supervisión regulatoria SBS.
+      </p>
+      <div class="impact-tag">
+        <span>🛡️</span> Blindaje ante delito de usura
+      </div>
+    </div>
+
+    <!-- 4. TECNOLÓGICO -->
+    <div class="septe-card card-navy">
+      <div class="dimension-pill pill-navy">T • TECNOLÓGICO</div>
+      <div class="icon-wrapper icon-navy">💻</div>
+      <h2 class="card-title">Tecnológico</h2>
+      <p class="card-desc">
+        <strong>Manejo informal en cuadernos</strong> / hojas de cálculo sin SGBD transaccional centralizado.
+      </p>
+      <div class="impact-tag" style="border-left-color: #0B1B3D;">
+        <span>🔄</span> Centralización transaccional
+      </div>
+    </div>
+
+    <!-- 5. ECOLÓGICO -->
+    <div class="septe-card card-gold">
+      <div class="dimension-pill pill-gold">E • ECOLÓGICO</div>
+      <div class="icon-wrapper icon-gold">🌱</div>
+      <h2 class="card-title">Ecológico</h2>
+      <p class="card-desc">
+        <strong>Digitalización elimina el uso masivo</strong> de fichas de cobranza y pagarés físicos en papel.
+      </p>
+      <div class="impact-tag">
+        <span>♻️</span> Operación cero papel
+      </div>
+    </div>
+
+  </div> <!-- End .cards-grid -->
+
+  <!-- Wide Bottom Strategic Banner -->
+  <div class="highlight-banner">
+    <div class="banner-icon-box">🎯</div>
+    <div class="banner-content">
+      <span class="banner-tag">Implicancia Estratégica del Modelo TO-BE</span>
+      <p class="banner-text">
+        El análisis SEPTE confirma que la supervivencia de BGG depende de reemplazar el registro en cuadernos por un <strong>SGBD relacional en SQL Server</strong>: protege legalmente a la empresa ante regulaciones de usura, asegura el control diario de cartera y elimina el desperdicio físico de papel.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

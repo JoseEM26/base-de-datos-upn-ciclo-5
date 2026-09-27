@@ -13,15 +13,15 @@
     background-color: #FFFFFF;
     font-family: Arial, 'Segoe UI', sans-serif;
     color: #000000;
-    width: 2500px;
-    height: 1450px;
+    width: 2560px;
+    height: 1260px;
     position: relative;
     overflow: hidden;
   }
   
   /* Header Title */
   .header-container {
-    padding: 30px 60px 10px 60px;
+    padding: 22px 60px 0 60px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -29,33 +29,38 @@
   .title-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   .main-title {
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 800;
     color: #0B1B3D;
     letter-spacing: -0.5px;
   }
   .subtitle {
-    font-size: 18px;
+    font-size: 16px;
     color: #555555;
     font-weight: 500;
   }
+  .header-meta {
+    font-size: 14px;
+    color: #666666;
+    text-align: right;
+  }
   .accent-bar {
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #FFC000 0%, #0B1B3D 70%);
-    margin-top: 15px;
+    margin: 12px 60px 0 60px;
+    height: 3.5px;
+    background: linear-gradient(90deg, #FFC000 0%, #0B1B3D 75%);
+    border-radius: 2px;
   }
 
   /* Canvas area for absolute positioning */
   #diagram-canvas {
     position: absolute;
-    top: 120px;
+    top: 92px;
     left: 0;
-    width: 2500px;
-    height: 1160px;
+    width: 2560px;
+    height: 1045px;
   }
 
   /* SVG Overlay for Connections */
@@ -63,8 +68,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 2500px;
-    height: 1160px;
+    width: 2560px;
+    height: 1045px;
     pointer-events: none;
     z-index: 1;
   }
@@ -72,7 +77,7 @@
   /* Table Cards */
   .table-card {
     position: absolute;
-    width: 380px;
+    width: 385px;
     background: #FFFFFF;
     border-radius: 8px;
     overflow: hidden;
@@ -82,24 +87,24 @@
   /* BORDERS */
   .card-party-core {
     border: 3.5px solid #FFC000;
-    box-shadow: 0 6px 18px rgba(255, 192, 0, 0.25), 0 2px 6px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 14px rgba(255, 192, 0, 0.22), 0 2px 5px rgba(0,0,0,0.05);
   }
   .card-bgg-core {
     border: 3.5px solid #0B1B3D;
-    box-shadow: 0 6px 18px rgba(11, 27, 61, 0.25), 0 2px 6px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 14px rgba(11, 27, 61, 0.22), 0 2px 5px rgba(0,0,0,0.05);
   }
 
   /* Card Header */
   .table-header {
     background-color: #000000;
     color: #FFFFFF;
-    padding: 11px 16px;
+    padding: 10px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .table-header .table-name {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 800;
     letter-spacing: 0.8px;
     text-transform: uppercase;
@@ -108,7 +113,7 @@
   .table-header .table-tag {
     font-size: 11px;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 2px 7px;
     border-radius: 4px;
     text-transform: uppercase;
   }
@@ -130,9 +135,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 7px 14px;
+    padding: 6.5px 12px;
     font-family: Consolas, 'Courier New', monospace;
-    font-size: 15px;
+    font-size: 15.5px;
     border-bottom: 1px solid #F0F0F0;
     white-space: nowrap;
   }
@@ -140,7 +145,7 @@
     border-bottom: none;
   }
   .col-row:nth-child(even) {
-    background-color: #FAFBFD;
+    background-color: #FAFAFC;
   }
   .col-left {
     display: flex;
@@ -185,54 +190,54 @@
   /* Footer & Legend */
   .footer-legend {
     position: absolute;
-    bottom: 25px;
+    bottom: 18px;
     left: 60px;
     right: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #F8F9FB;
-    border: 1px solid #E2E6EE;
+    background-color: #F8F9FA;
+    border: 1px solid #E5E8EC;
     border-radius: 8px;
-    padding: 14px 28px;
+    padding: 12px 24px;
     z-index: 20;
   }
   .legend-items {
     display: flex;
-    gap: 40px;
+    gap: 36px;
     align-items: center;
   }
   .legend-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
   .legend-box {
-    width: 24px;
+    width: 22px;
     height: 16px;
-    border-radius: 4px;
+    border-radius: 3px;
   }
   .box-party {
-    border: 3.5px solid #FFC000;
+    border: 3px solid #FFC000;
     background-color: #FFF3CC;
   }
   .box-bgg {
-    border: 3.5px solid #0B1B3D;
+    border: 3px solid #0B1B3D;
     background-color: #FFFFFF;
   }
   .legend-label {
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 700;
     color: #0B1B3D;
   }
   .legend-desc {
-    font-size: 14px;
+    font-size: 13.5px;
     color: #555555;
     margin-left: 4px;
     font-weight: normal;
   }
   .footer-note {
-    font-size: 14px;
+    font-size: 13.5px;
     color: #666666;
     font-style: italic;
   }
@@ -240,13 +245,13 @@
   /* SVG Labels */
   .rel-label {
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
-    fill: #0B1B3D;
+    dominant-baseline: central;
+    text-anchor: middle;
   }
   .rel-bg {
     fill: #FFFFFF;
-    stroke: #D0D5DD;
     stroke-width: 1.5;
     rx: 4;
     ry: 4;
@@ -259,10 +264,11 @@
   <div class="header-container">
     <div class="title-group">
       <div class="main-title">Modelo Conceptual y Lógico TO-BE — Patrón PARTY aplicado a BGG</div>
-      <div class="subtitle">Desacoplamiento de Identidad y Roles con Trazabilidad Operativa para Microfinanzas</div>
+      <div class="subtitle">Esquema Relacional Normalizado con Desacoplamiento de Identidad, Roles y Operaciones Financieras</div>
     </div>
-    <div style="font-size: 14px; color: #666; text-align: right;">
-      <strong>UPN — Base de Datos</strong> | Proyecto Final BGG
+    <div class="header-meta">
+      <strong>UPN — Base de Datos</strong><br>
+      Arquitectura TO-BE Microfinanzas BGG
     </div>
   </div>
   <div class="accent-bar"></div>
@@ -271,19 +277,21 @@
   <div id="diagram-canvas">
     <svg id="connections-svg">
       <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M 0 1 L 10 5 L 0 9 z" fill="#0B1B3D" />
+        <!-- Navy Arrow -->
+        <marker id="arrow-navy" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0B1B3D" />
         </marker>
-        <marker id="arrow-gold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M 0 1 L 10 5 L 0 9 z" fill="#D49B00" />
+        <!-- Gold Arrow -->
+        <marker id="arrow-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#C99400" />
         </marker>
       </defs>
       <g id="svg-paths-container"></g>
     </svg>
 
-    <!-- COLUMN 1: PERIPHERAL PARTY TABLES -->
+    <!-- COLUMN 1: PERIPHERAL PARTY TABLES (X = 65px) -->
     <!-- PERSON -->
-    <div id="tbl-person" class="table-card card-party-core" style="left: 60px; top: 20px;">
+    <div id="tbl-person" class="table-card card-party-core" style="left: 65px; top: 15px;">
       <div class="table-header">
         <span class="table-name">PERSON</span>
         <span class="table-tag tag-party">PARTY</span>
@@ -298,7 +306,7 @@
     </div>
 
     <!-- ORGANIZATION -->
-    <div id="tbl-organization" class="table-card card-party-core" style="left: 60px; top: 260px;">
+    <div id="tbl-organization" class="table-card card-party-core" style="left: 65px; top: 255px;">
       <div class="table-header">
         <span class="table-name">ORGANIZATION</span>
         <span class="table-tag tag-party">PARTY</span>
@@ -312,7 +320,7 @@
     </div>
 
     <!-- CONTACT_MECHANISM -->
-    <div id="tbl-contact_mechanism" class="table-card card-party-core" style="left: 60px; top: 480px;">
+    <div id="tbl-contact_mechanism" class="table-card card-party-core" style="left: 65px; top: 470px;">
       <div class="table-header">
         <span class="table-name">CONTACT_MECHANISM</span>
         <span class="table-tag tag-party">PARTY</span>
@@ -327,7 +335,7 @@
     </div>
 
     <!-- PARTY_IDENTIFIER -->
-    <div id="tbl-party_identifier" class="table-card card-party-core" style="left: 60px; top: 730px;">
+    <div id="tbl-party_identifier" class="table-card card-party-core" style="left: 65px; top: 710px;">
       <div class="table-header">
         <span class="table-name">PARTY_IDENTIFIER</span>
         <span class="table-tag tag-party">PARTY</span>
@@ -343,12 +351,12 @@
       </div>
     </div>
 
-    <!-- COLUMN 2: HUB PARTY & RELATIONSHIPS -->
+    <!-- COLUMN 2: HUB PARTY & RELATIONSHIPS (X = 590px) -->
     <!-- PARTY -->
-    <div id="tbl-party" class="table-card card-party-core" style="left: 560px; top: 120px;">
-      <div class="table-header" style="background: linear-gradient(135deg, #000000 70%, #222222 100%);">
-        <span class="table-name">PARTY (NÚCLEO)</span>
-        <span class="table-tag tag-party">BASE</span>
+    <div id="tbl-party" class="table-card card-party-core" style="left: 590px; top: 140px;">
+      <div class="table-header">
+        <span class="table-name">PARTY</span>
+        <span class="table-tag tag-party">NÚCLEO</span>
       </div>
       <div class="table-body">
         <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
@@ -359,7 +367,7 @@
     </div>
 
     <!-- PARTY_RELATIONSHIP -->
-    <div id="tbl-party_relationship" class="table-card card-party-core" style="left: 560px; top: 580px;">
+    <div id="tbl-party_relationship" class="table-card card-party-core" style="left: 590px; top: 480px;">
       <div class="table-header">
         <span class="table-name">PARTY_RELATIONSHIP</span>
         <span class="table-tag tag-party">PARTY</span>
@@ -376,8 +384,8 @@
       </div>
     </div>
 
-    <!-- COLUMN 3: PARTY_ROLE -->
-    <div id="tbl-party_role" class="table-card card-party-core" style="left: 1060px; top: 120px;">
+    <!-- COLUMN 3: PARTY_ROLE (X = 1080px) -->
+    <div id="tbl-party_role" class="table-card card-party-core" style="left: 1080px; top: 140px;">
       <div class="table-header">
         <span class="table-name">PARTY_ROLE</span>
         <span class="table-tag tag-party">PARTY</span>
@@ -391,8 +399,8 @@
       </div>
     </div>
 
-    <!-- COLUMN 4: PRESTATARIO_DETAIL -->
-    <div id="tbl-prestatario_detail" class="table-card card-bgg-core" style="left: 1540px; top: 120px;">
+    <!-- COLUMN 4: PRESTATARIO_DETAIL (X = 1570px) -->
+    <div id="tbl-prestatario_detail" class="table-card card-bgg-core" style="left: 1570px; top: 140px;">
       <div class="table-header">
         <span class="table-name">PRESTATARIO_DETAIL</span>
         <span class="table-tag tag-bgg">BGG</span>
@@ -405,8 +413,9 @@
       </div>
     </div>
 
-    <!-- COLUMN 5: CREDITO (TOP RIGHT) -->
-    <div id="tbl-credito" class="table-card card-bgg-core" style="left: 2020px; top: 120px;">
+    <!-- COLUMN 5: CREDITO (TOP) & PAGO (BOTTOM) (X = 2060px) -->
+    <!-- CREDITO -->
+    <div id="tbl-credito" class="table-card card-bgg-core" style="left: 2060px; top: 140px;">
       <div class="table-header">
         <span class="table-name">CREDITO</span>
         <span class="table-tag tag-bgg">BGG</span>
@@ -420,8 +429,8 @@
       </div>
     </div>
 
-    <!-- PAGO (MIDDLE RIGHT) -->
-    <div id="tbl-pago" class="table-card card-bgg-core" style="left: 1780px; top: 520px;">
+    <!-- PAGO -->
+    <div id="tbl-pago" class="table-card card-bgg-core" style="left: 2060px; top: 480px;">
       <div class="table-header">
         <span class="table-name">PAGO</span>
         <span class="table-tag tag-bgg">BGG</span>
@@ -456,12 +465,26 @@
       </div>
     </div>
     <div class="footer-note">
-      * Arquitectura relacional desacoplada: cada persona u organización posee una única identidad física con múltiples roles concurrentes.
+      * Arquitectura TO-BE desacoplada: una persona u organización posee una única identidad física con múltiples roles concurrentes.
     </div>
   </div>
 
   <script>
-    // Compute SVG connectors dynamically
+    function getBezierPoint(p0, p1, p2, p3, t) {
+      const cx = 3 * (p1.x - p0.x);
+      const bx = 3 * (p2.x - p1.x) - cx;
+      const ax = p3.x - p0.x - cx - bx;
+
+      const cy = 3 * (p1.y - p0.y);
+      const by = 3 * (p2.y - p1.y) - cy;
+      const ay = p3.y - p0.y - cy - by;
+
+      const xt = ax * Math.pow(t, 3) + bx * Math.pow(t, 2) + cx * t + p0.x;
+      const yt = ay * Math.pow(t, 3) + by * Math.pow(t, 2) + cy * t + p0.y;
+
+      return { x: xt, y: yt };
+    }
+
     function drawConnections() {
       const canvas = document.getElementById('diagram-canvas');
       const canvasRect = canvas.getBoundingClientRect();
@@ -479,26 +502,66 @@
       }
 
       const connections = [
-        // PARTY -> PERSON (es)
-        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.20, to: 'tbl-person', toSide: 'right', toRatio: 0.5, label: 'es', marker: 'arrow-gold', color: '#D49B00' },
-        // PARTY -> ORGANIZATION (es)
-        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.45, to: 'tbl-organization', toSide: 'right', toRatio: 0.5, label: 'es', marker: 'arrow-gold', color: '#D49B00' },
-        // PARTY -> CONTACT_MECHANISM (tiene)
-        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.70, to: 'tbl-contact_mechanism', toSide: 'right', toRatio: 0.5, label: 'tiene', marker: 'arrow-gold', color: '#D49B00' },
-        // PARTY -> PARTY_IDENTIFIER (tiene)
-        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.90, to: 'tbl-party_identifier', toSide: 'right', toRatio: 0.35, label: 'tiene', marker: 'arrow-gold', color: '#D49B00' },
-        // PARTY -> PARTY_RELATIONSHIP (participa)
-        { from: 'tbl-party', fromSide: 'bottom', fromRatio: 0.5, to: 'tbl-party_relationship', toSide: 'top', toRatio: 0.5, label: 'participa', marker: 'arrow-gold', color: '#D49B00' },
-        // PARTY -> PARTY_ROLE (ejerce)
-        { from: 'tbl-party', fromSide: 'right', fromRatio: 0.5, to: 'tbl-party_role', toSide: 'left', toRatio: 0.5, label: 'ejerce', marker: 'arrow-gold', color: '#D49B00' },
-        // PARTY_ROLE -> PRESTATARIO_DETAIL (detalla)
-        { from: 'tbl-party_role', fromSide: 'right', fromRatio: 0.5, to: 'tbl-prestatario_detail', toSide: 'left', toRatio: 0.5, label: 'detalla', marker: 'arrow', color: '#0B1B3D' },
-        // PRESTATARIO_DETAIL -> CREDITO (origina)
-        { from: 'tbl-prestatario_detail', fromSide: 'right', fromRatio: 0.5, to: 'tbl-credito', toSide: 'left', toRatio: 0.5, label: 'origina', marker: 'arrow', color: '#0B1B3D' },
-        // CREDITO -> PAGO (recibe)
-        { from: 'tbl-credito', fromSide: 'bottom', fromRatio: 0.45, to: 'tbl-pago', toSide: 'right', toRatio: 0.35, label: 'recibe', marker: 'arrow', color: '#0B1B3D', curve: 'elbow-right' },
-        // PARTY_ROLE -> PAGO (cobra)
-        { from: 'tbl-party_role', fromSide: 'bottom', fromRatio: 0.6, to: 'tbl-pago', toSide: 'left', toRatio: 0.5, label: 'cobra', marker: 'arrow', color: '#0B1B3D', curve: 'elbow-left' }
+        // 1. PARTY -> PERSON (es)
+        {
+          from: 'tbl-party', fromSide: 'left', fromRatio: 0.22,
+          to: 'tbl-person', toSide: 'right', toRatio: 0.50,
+          type: 'curve-fanout', labelT: 0.50, label: 'es', marker: 'arrow-gold', color: '#C99400'
+        },
+        // 2. PARTY -> ORGANIZATION (es)
+        {
+          from: 'tbl-party', fromSide: 'left', fromRatio: 0.48,
+          to: 'tbl-organization', toSide: 'right', toRatio: 0.50,
+          type: 'curve-fanout', labelT: 0.50, label: 'es', marker: 'arrow-gold', color: '#C99400'
+        },
+        // 3. PARTY -> CONTACT_MECHANISM (tiene)
+        {
+          from: 'tbl-party', fromSide: 'left', fromRatio: 0.72,
+          to: 'tbl-contact_mechanism', toSide: 'right', toRatio: 0.50,
+          type: 'curve-fanout', labelT: 0.40, label: 'tiene', marker: 'arrow-gold', color: '#C99400'
+        },
+        // 4. PARTY -> PARTY_IDENTIFIER (tiene)
+        {
+          from: 'tbl-party', fromSide: 'left', fromRatio: 0.90,
+          to: 'tbl-party_identifier', toSide: 'right', toRatio: 0.38,
+          type: 'curve-fanout', labelT: 0.68, label: 'tiene', marker: 'arrow-gold', color: '#C99400'
+        },
+        // 5. PARTY -> PARTY_RELATIONSHIP (participa)
+        {
+          from: 'tbl-party', fromSide: 'bottom', fromRatio: 0.50,
+          to: 'tbl-party_relationship', toSide: 'top', toRatio: 0.50,
+          type: 'straight', labelT: 0.50, label: 'participa', marker: 'arrow-gold', color: '#C99400'
+        },
+        // 6. PARTY -> PARTY_ROLE (ejerce)
+        {
+          from: 'tbl-party', fromSide: 'right', fromRatio: 0.50,
+          to: 'tbl-party_role', toSide: 'left', toRatio: 0.50,
+          type: 'straight', labelT: 0.50, label: 'ejerce', marker: 'arrow-gold', color: '#C99400'
+        },
+        // 7. PARTY_ROLE -> PRESTATARIO_DETAIL (detalla)
+        {
+          from: 'tbl-party_role', fromSide: 'right', fromRatio: 0.50,
+          to: 'tbl-prestatario_detail', toSide: 'left', toRatio: 0.50,
+          type: 'straight', labelT: 0.50, label: 'detalla', marker: 'arrow-navy', color: '#0B1B3D'
+        },
+        // 8. PRESTATARIO_DETAIL -> CREDITO (origina)
+        {
+          from: 'tbl-prestatario_detail', fromSide: 'right', fromRatio: 0.50,
+          to: 'tbl-credito', toSide: 'left', toRatio: 0.50,
+          type: 'straight', labelT: 0.50, label: 'origina', marker: 'arrow-navy', color: '#0B1B3D'
+        },
+        // 9. CREDITO -> PAGO (recibe)
+        {
+          from: 'tbl-credito', fromSide: 'bottom', fromRatio: 0.50,
+          to: 'tbl-pago', toSide: 'top', toRatio: 0.50,
+          type: 'straight', labelT: 0.50, label: 'recibe', marker: 'arrow-navy', color: '#0B1B3D'
+        },
+        // 10. PARTY_ROLE -> PAGO (cobra)
+        {
+          from: 'tbl-party_role', fromSide: 'bottom', fromRatio: 0.55,
+          to: 'tbl-pago', toSide: 'left', toRatio: 0.50,
+          type: 'elbow-rounded', labelT: 0.45, label: 'cobra', marker: 'arrow-navy', color: '#0B1B3D'
+        }
       ];
 
       connections.forEach(conn => {
@@ -509,61 +572,53 @@
         let midX = (p1.x + p2.x) / 2;
         let midY = (p1.y + p2.y) / 2;
 
-        if (conn.curve === 'elbow-right') {
-          // Down from credito, then left into right of pago
-          const cornerY = p2.y;
-          d = `M ${p1.x} ${p1.y} L ${p1.x} ${cornerY} L ${p2.x} ${cornerY}`;
-          midX = p1.x - 30;
-          midY = (p1.y + cornerY) / 2;
-        } else if (conn.curve === 'elbow-left') {
-          // Down from party_role, then right into left of pago
-          const cornerY = p2.y;
-          d = `M ${p1.x} ${p1.y} L ${p1.x} ${cornerY} L ${p2.x} ${cornerY}`;
-          midX = (p1.x + p2.x) / 2;
-          midY = cornerY;
-        } else if (conn.fromSide === 'left' && conn.toSide === 'right') {
-          // Smooth bezier curve or straight
-          const dx = Math.abs(p2.x - p1.x) * 0.4;
-          d = `M ${p1.x} ${p1.y} C ${p1.x - dx} ${p1.y}, ${p2.x + dx} ${p2.y}, ${p2.x} ${p2.y}`;
-        } else if (conn.fromSide === 'right' && conn.toSide === 'left') {
-          // Straight horizontal or gentle S
-          if (Math.abs(p1.y - p2.y) < 5) {
-            d = `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
-          } else {
-            const dx = Math.abs(p2.x - p1.x) * 0.5;
-            d = `M ${p1.x} ${p1.y} C ${p1.x + dx} ${p1.y}, ${p2.x - dx} ${p2.y}, ${p2.x} ${p2.y}`;
-          }
-        } else {
+        if (conn.type === 'straight') {
           d = `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
+          midX = p1.x + (p2.x - p1.x) * conn.labelT;
+          midY = p1.y + (p2.y - p1.y) * conn.labelT;
+        } else if (conn.type === 'curve-fanout') {
+          const dx = Math.abs(p1.x - p2.x) * 0.5;
+          const cp1 = { x: p1.x - dx, y: p1.y };
+          const cp2 = { x: p2.x + dx, y: p2.y };
+          d = `M ${p1.x} ${p1.y} C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${p2.x} ${p2.y}`;
+          
+          const pt = getBezierPoint(p1, cp1, cp2, p2, conn.labelT);
+          midX = pt.x;
+          midY = pt.y;
+        } else if (conn.type === 'elbow-rounded') {
+          const r = 16;
+          const cornerY = p2.y;
+          d = `M ${p1.x} ${p1.y} L ${p1.x} ${cornerY - r} Q ${p1.x} ${cornerY} ${p1.x + r} ${cornerY} L ${p2.x} ${cornerY}`;
+          midX = p1.x + (p2.x - p1.x) * conn.labelT;
+          midY = cornerY;
         }
 
-        // Create Path
+        // Draw Path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', d);
         path.setAttribute('fill', 'none');
         path.setAttribute('stroke', conn.color);
-        path.setAttribute('stroke-width', '2.5');
+        path.setAttribute('stroke-width', '2.2');
         path.setAttribute('marker-end', `url(#${conn.marker})`);
         svgContainer.appendChild(path);
 
-        // Create Label
+        // Draw Label Pill
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.textContent = conn.label;
-        text.setAttribute('class', 'rel-label');
-        text.setAttribute('x', midX);
-        text.setAttribute('y', midY + 4);
-        text.setAttribute('text-anchor', 'middle');
-        
-        // Measure text approx
-        const textWidth = conn.label.length * 9 + 16;
+        const textWidth = conn.label.length * 8.5 + 18;
         const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rect.setAttribute('class', 'rel-bg');
         rect.setAttribute('x', midX - textWidth / 2);
         rect.setAttribute('y', midY - 11);
         rect.setAttribute('width', textWidth);
-        rect.setAttribute('height', 20);
+        rect.setAttribute('height', 22);
         rect.setAttribute('stroke', conn.color);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.textContent = conn.label;
+        text.setAttribute('class', 'rel-label');
+        text.setAttribute('x', midX);
+        text.setAttribute('y', midY);
+        text.setAttribute('fill', conn.color);
 
         g.appendChild(rect);
         g.appendChild(text);

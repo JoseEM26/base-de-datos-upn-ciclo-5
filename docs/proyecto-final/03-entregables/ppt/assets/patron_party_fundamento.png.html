@@ -19,8 +19,8 @@
   }
   .header {
     text-align: center;
-    margin-bottom: 30px;
-    padding-bottom: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
     border-bottom: 2px solid #ECEFF1;
   }
   .header h1 {
@@ -41,7 +41,7 @@
     grid-template-columns: 1fr 60px 1fr 60px 1fr;
     gap: 8px;
     align-items: stretch;
-    margin-bottom: 26px;
+    margin-bottom: 24px;
   }
   
   /* CONNECTOR ARROWS */
@@ -75,7 +75,6 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: transform 0.2s ease;
   }
   .card-top {
     background: linear-gradient(135deg, #0B1B3D, #193366);
@@ -86,7 +85,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   .card-icon {
     font-size: 46px;
@@ -99,37 +98,37 @@
     color: #FFC000;
     letter-spacing: -0.3px;
   }
-  .card-concept {
-    font-size: 15px;
+  .card-subtitle {
+    font-size: 13.5px;
     font-weight: 600;
     color: #FFFFFF;
     background: rgba(255, 255, 255, 0.12);
     padding: 3px 12px;
     border-radius: 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
   }
   
   .card-body {
-    padding: 24px 22px;
+    padding: 22px 20px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     flex: 1;
   }
-  .card-entities {
+  .card-concept-badge {
     background: #FFF3CC;
     border: 1px solid #FFE082;
     border-radius: 8px;
-    padding: 10px 14px;
+    padding: 8px 12px;
     text-align: center;
     font-weight: 700;
     font-size: 13px;
     color: #0B1B3D;
-    font-family: 'Consolas', 'Courier New', monospace;
   }
   .card-description {
-    font-size: 14px;
+    font-size: 13.5px;
     color: #444444;
-    line-height: 1.55;
+    line-height: 1.5;
     flex: 1;
   }
   .card-highlights {
@@ -204,17 +203,17 @@
       <div class="card-top">
         <div class="card-icon">🪪</div>
         <div class="card-question">¿Quién existe?</div>
-        <div class="card-concept">Identidad Ontológica</div>
+        <div class="card-subtitle">Identidad (PARTY, PERSON, ORGANIZATION)</div>
       </div>
       <div class="card-body">
-        <div class="card-entities">PARTY • PERSON • ORGANIZATION</div>
+        <div class="card-concept-badge">Existencia Ontológica Inmutable</div>
         <div class="card-description">
           Representa la existencia inmutable del individuo o institución en el mundo real, con total independencia de los vínculos contractuales o comerciales que mantenga con la entidad.
         </div>
         <div class="card-highlights">
-          <div class="highlight-item"><span class="highlight-bullet">✓</span> Inmutable en el tiempo</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Inmutable a lo largo del tiempo</div>
           <div class="highlight-item"><span class="highlight-bullet">✓</span> Cero duplicación de identidad</div>
-          <div class="highlight-item"><span class="highlight-bullet">✓</span> Contacto centralizado y único</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Contacto universal centralizado</div>
         </div>
       </div>
       <div class="card-footer">Dimensión Ontológica</div>
@@ -230,17 +229,17 @@
       <div class="card-top">
         <div class="card-icon">🎭</div>
         <div class="card-question">¿Qué función ejerce?</div>
-        <div class="card-concept">Rol Temporal de Negocio</div>
+        <div class="card-subtitle">Rol temporal (PARTY_ROLE)</div>
       </div>
       <div class="card-body">
-        <div class="card-entities">PARTY_ROLE • CUSTOMER / AVAL / COLLECTOR</div>
+        <div class="card-concept-badge">Función de Negocio Dinámica</div>
         <div class="card-description">
           Define el papel o capacidad operativa que ejerce la parte en un periodo determinado. Una misma persona puede asumir múltiples roles simultáneos sin alterar su identidad.
         </div>
         <div class="card-highlights">
           <div class="highlight-item"><span class="highlight-bullet">✓</span> Dinámico y no excluyente</div>
-          <div class="highlight-item"><span class="highlight-bullet">✓</span> Rango de fechas (vigencia)</div>
-          <div class="highlight-item"><span class="highlight-bullet">✓</span> Auditoría histórica completa</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Rango de fechas (vigencia histórica)</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Auditoría total sin amnesia</div>
         </div>
       </div>
       <div class="card-footer">Dimensión Funcional</div>
@@ -256,17 +255,17 @@
       <div class="card-top">
         <div class="card-icon">🔗</div>
         <div class="card-question">¿Con quién se relaciona?</div>
-        <div class="card-concept">Vínculo Dirigido y Fechado</div>
+        <div class="card-subtitle">Vínculo dirigido (PARTY_RELATIONSHIP)</div>
       </div>
       <div class="card-body">
-        <div class="card-entities">PARTY_RELATIONSHIP • FROM / TO</div>
+        <div class="card-concept-badge">Asociación Contextual Dirigida</div>
         <div class="card-description">
           Modela asociaciones contextuales dirigidas entre dos partes (ej. Aval garantiza a Cliente, Cobrador asignado a Cliente, Persona empleada por Organización).
         </div>
         <div class="card-highlights">
           <div class="highlight-item"><span class="highlight-bullet">✓</span> Vínculos dirigidos (origen / destino)</div>
           <div class="highlight-item"><span class="highlight-bullet">✓</span> Vigencia histórica del vínculo</div>
-          <div class="highlight-item"><span class="highlight-bullet">✓</span> Red relacional y de garantías</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Red relacional y garantías</div>
         </div>
       </div>
       <div class="card-footer">Dimensión Relacional</div>

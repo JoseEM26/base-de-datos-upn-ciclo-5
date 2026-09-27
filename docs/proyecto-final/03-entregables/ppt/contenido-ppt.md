@@ -104,13 +104,13 @@
   - **2. ¿Qué función ejerce? (Rol de Negocio):** `PARTY_ROLE` (`PRESTATARIO`, `AVAL`, `COBRADOR`) con vigencia temporal.
   - **3. ¿Con quién se relaciona? (Vínculo Dirigido):** `PARTY_RELATIONSHIP` (vínculos fechados: avala a, cobra a).
 
-[IMAGEN: patron_party_hub.png — diagrama conceptual del patrón PARTY: hub central con personas, organizaciones, roles y relaciones]
+[IMAGEN: patron_party_fundamento.png — diagrama conceptual del patrón PARTY: hub central con personas, organizaciones, roles y relaciones]
 
 ---
 
 ## Diapositiva 8: Modelo Conceptual y Lógico TO-BE
 
-[IMAGEN: modelo_er_to_be.png — diagrama entidad-relación (ERD) completo del modelo TO-BE con patrón PARTY y módulo financiero]
+[IMAGEN: er_bgg.png — diagrama entidad-relación (ERD) completo del modelo TO-BE con patrón PARTY y módulo financiero]
 
 - **Núcleo de Identidad:** `PARTY` generaliza a `PERSON` y `ORGANIZATION` mediante subtipado 1:1 exclusivo.
 - **Mecanismos y Documentos:** `PARTY_IDENTIFIER` (DNI, RUC, CE) y `CONTACT_MECHANISM` desacoplados con cardinalidad 1:N.

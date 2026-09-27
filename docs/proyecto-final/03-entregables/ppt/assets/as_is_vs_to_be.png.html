@@ -19,8 +19,8 @@
   }
   .header {
     text-align: center;
-    margin-bottom: 24px;
-    padding-bottom: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
     border-bottom: 2px solid #ECEFF1;
   }
   .header h1 {
@@ -31,7 +31,7 @@
     margin-bottom: 6px;
   }
   .header p {
-    font-size: 16px;
+    font-size: 15px;
     color: #666666;
     font-weight: 500;
   }
@@ -48,7 +48,7 @@
     border: 2px solid #B00020;
     border-radius: 12px;
     background: #FFFFFF;
-    box-shadow: 0 8px 24px rgba(176, 0, 32, 0.07);
+    box-shadow: 0 8px 24px rgba(176, 0, 32, 0.08);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -56,42 +56,59 @@
   .panel-header-as-is {
     background: linear-gradient(135deg, #B00020, #8E0017);
     color: #FFFFFF;
-    padding: 16px 20px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .panel-header-as-is h2 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 700;
   }
-  .badge-warning {
+  .badge-warning-header {
     background: #FFFFFF;
     color: #B00020;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 4px;
   }
   .panel-body {
-    padding: 20px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     flex: 1;
+  }
+  
+  /* WARNING CALLOUT BAR */
+  .callout-warnings {
+    display: flex;
+    gap: 10px;
+  }
+  .callout-pill-warn {
+    flex: 1;
+    background: #FDEDEC;
+    border: 1px solid #F5B7B1;
+    color: #B00020;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
   }
   
   /* TABLES AS-IS */
   .tables-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   .table-card {
-    border: 1px solid #E0E0E0;
+    border: 1px solid #D9D9D9;
     border-radius: 8px;
     overflow: hidden;
     background: #FAFAFA;
@@ -100,12 +117,12 @@
     background: #ECEFF1;
     color: #0B1B3D;
     font-weight: 700;
-    font-size: 14px;
-    padding: 7px 14px;
+    font-size: 13.5px;
+    padding: 6px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #E0E0E0;
+    border-bottom: 1px solid #D9D9D9;
   }
   .table-header span.tag {
     font-size: 11px;
@@ -113,7 +130,7 @@
     font-weight: normal;
   }
   .table-rows {
-    padding: 8px 14px;
+    padding: 7px 12px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
@@ -150,27 +167,24 @@
   .warning-box {
     background: #FDF2E9;
     border-left: 4px solid #B00020;
-    padding: 12px 14px;
+    padding: 10px 14px;
     border-radius: 6px;
     margin-top: auto;
   }
   .warning-box h4 {
     color: #B00020;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
   .warning-box ul {
     list-style: none;
-    font-size: 12px;
+    font-size: 11.5px;
     color: #4A151B;
-    line-height: 1.5;
-  }
-  .warning-box li {
-    margin-bottom: 4px;
+    line-height: 1.45;
   }
   
   /* CENTER DIVIDER */
@@ -195,7 +209,7 @@
     color: #FFFFFF;
     border: 2px solid #FFC000;
     border-radius: 50px;
-    padding: 16px 10px;
+    padding: 18px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -203,11 +217,11 @@
     box-shadow: 0 4px 14px rgba(11, 27, 61, 0.2);
   }
   .divider-badge .icon {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 4px;
   }
   .divider-badge .text {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 800;
     letter-spacing: 0.5px;
     color: #FFC000;
@@ -232,50 +246,68 @@
   .panel-header-to-be {
     background: linear-gradient(135deg, #0B1B3D, #193366);
     color: #FFFFFF;
-    padding: 16px 20px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 3px solid #FFC000;
   }
   .panel-header-to-be h2 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 700;
     color: #FFFFFF;
   }
-  .badge-success {
+  .badge-success-header {
     background: #FFC000;
     color: #0B1B3D;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 800;
+  }
+  
+  /* TO-BE CALLOUT BAR */
+  .callout-success {
+    display: flex;
+    gap: 10px;
+  }
+  .callout-pill-succ {
+    flex: 1;
+    background: #FFF3CC;
+    border: 1px solid #FFC000;
+    color: #0B1B3D;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 6px;
   }
   
   /* PARTY STRUCTURE */
   .party-layout {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    align-items: center;
   }
   .party-core {
-    background: #FFF3CC;
+    width: 100%;
+    background: #FFFDF5;
     border: 2px solid #FFC000;
     border-radius: 8px;
-    padding: 12px 16px;
-    box-shadow: 0 4px 12px rgba(255, 192, 0, 0.1);
+    padding: 10px 14px;
+    box-shadow: 0 4px 12px rgba(255, 192, 0, 0.12);
   }
   .party-core-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .party-core-title {
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 800;
     color: #0B1B3D;
     display: flex;
@@ -284,7 +316,7 @@
   }
   .party-core-pill {
     background: #0B1B3D;
-    color: #FFFFFF;
+    color: #FFC000;
     font-size: 11px;
     font-weight: 700;
     padding: 2px 8px;
@@ -299,51 +331,62 @@
     background: #FFFFFF;
     border: 1px solid #FFE082;
     border-radius: 6px;
-    padding: 8px 10px;
-    font-size: 12px;
+    padding: 6px 10px;
+    font-size: 11.5px;
   }
   .subtype-name {
     font-weight: 700;
     color: #0B1B3D;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    margin-bottom: 2px;
   }
   .subtype-cols {
     font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 11px;
+    font-size: 10.5px;
     color: #444444;
   }
   
+  /* VISUAL CONNECTORS (BRANCHING LINES) */
+  .connector-tree {
+    width: 100%;
+    height: 28px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .connector-tree svg {
+    width: 100%;
+    height: 100%;
+  }
+  
   .party-extensions {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
   }
   .ext-card {
     background: #FAFAFA;
-    border: 1px solid #CFD8DC;
+    border: 1.5px solid #CFD8DC;
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
   }
   .ext-card-header {
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
     color: #0B1B3D;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     border-bottom: 1px solid #ECEFF1;
     padding-bottom: 4px;
   }
   .ext-card-content {
-    font-size: 11.5px;
+    font-size: 11px;
     color: #444444;
-    line-height: 1.4;
+    line-height: 1.35;
   }
   .ext-card-tags {
     display: flex;
@@ -354,9 +397,9 @@
   .ext-tag {
     background: #E8EAF6;
     color: #0B1B3D;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 6px;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 5px;
     border-radius: 4px;
   }
   
@@ -364,27 +407,24 @@
   .success-box {
     background: #F4FBF7;
     border-left: 4px solid #2E7D32;
-    padding: 12px 14px;
+    padding: 10px 14px;
     border-radius: 6px;
     margin-top: auto;
   }
   .success-box h4 {
     color: #2E7D32;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
   .success-box ul {
     list-style: none;
-    font-size: 12px;
+    font-size: 11.5px;
     color: #1B4D20;
-    line-height: 1.5;
-  }
-  .success-box li {
-    margin-bottom: 4px;
+    line-height: 1.45;
   }
 </style>
 </head>
@@ -399,10 +439,16 @@
     <!-- PANEL AS-IS -->
     <div class="panel-as-is">
       <div class="panel-header-as-is">
-        <h2>AS-IS: Modelo Relacional Convencional</h2>
-        <div class="badge-warning">⚠️ Problemas Estructurales</div>
+        <h2>AS-IS — Base de Datos Relacional Convencional</h2>
+        <div class="badge-warning-header">⚠️ Problemas Estructurales</div>
       </div>
       <div class="panel-body">
+        <!-- CALLOUT BADGES NEAR TABLES -->
+        <div class="callout-warnings">
+          <div class="callout-pill-warn">⚠️ Datos Duplicados en Múltiples Tablas</div>
+          <div class="callout-pill-warn">⚠️ Sin Historial ni Trazabilidad</div>
+        </div>
+
         <div class="tables-grid">
           <!-- CLIENTES -->
           <div class="table-card">
@@ -457,9 +503,9 @@
         <div class="warning-box">
           <h4>⚠️ Patologías del Modelo Convencional:</h4>
           <ul>
-            <li>• <strong>Datos duplicados:</strong> Si un cliente también es aval o cobrador, sus datos se triplican en BD.</li>
+            <li>• <strong>Datos duplicados:</strong> Si una persona es cliente y aval, sus datos personales se triplican en BD.</li>
             <li>• <strong>Sin historial (amnesia):</strong> Si un cobrador es despedido o un aval cambia, se sobreescribe el registro.</li>
-            <li>• <strong>Inconsistencia operacional:</strong> Actualizar el teléfono en CLIENTES no actualiza AVALES ni COBRADORES.</li>
+            <li>• <strong>Inconsistencia operacional:</strong> Modificar el teléfono en CLIENTES deja desactualizado AVALES.</li>
           </ul>
         </div>
       </div>
@@ -478,10 +524,16 @@
     <!-- PANEL TO-BE -->
     <div class="panel-to-be">
       <div class="panel-header-to-be">
-        <h2>TO-BE: Patrón PARTY</h2>
-        <div class="badge-success">✅ Arquitectura Escalable</div>
+        <h2>TO-BE — Patrón PARTY</h2>
+        <div class="badge-success-header">✅ Arquitectura Escalable</div>
       </div>
       <div class="panel-body">
+        <!-- CALLOUT BADGES NEAR CARDS -->
+        <div class="callout-success">
+          <div class="callout-pill-succ">✅ Identidad Centralizada (Única)</div>
+          <div class="callout-pill-succ">✅ Trazabilidad Histórica Completa</div>
+        </div>
+
         <div class="party-layout">
           <!-- CORE PARTY -->
           <div class="party-core">
@@ -503,6 +555,22 @@
             </div>
           </div>
           
+          <!-- VISUAL BRANCHING CONNECTOR -->
+          <div class="connector-tree">
+            <svg viewBox="0 0 400 28" preserveAspectRatio="none">
+              <!-- Stem down from center of PARTY card -->
+              <line x1="200" y1="0" x2="200" y2="12" stroke="#FFC000" stroke-width="2.5" />
+              <!-- Horizontal branch -->
+              <line x1="100" y1="12" x2="300" y2="12" stroke="#FFC000" stroke-width="2.5" />
+              <!-- Left drop arrow to ROLES -->
+              <line x1="100" y1="12" x2="100" y2="24" stroke="#FFC000" stroke-width="2.5" />
+              <polygon points="96,22 100,28 104,22" fill="#FFC000" />
+              <!-- Right drop arrow to RELATIONSHIPS -->
+              <line x1="300" y1="12" x2="300" y2="24" stroke="#FFC000" stroke-width="2.5" />
+              <polygon points="296,22 300,28 304,22" fill="#FFC000" />
+            </svg>
+          </div>
+          
           <!-- EXTENSIONS -->
           <div class="party-extensions">
             <!-- ROLES -->
@@ -512,14 +580,14 @@
               </div>
               <div class="ext-card-content">
                 <strong>¿Qué función ejerce?</strong><br>
-                Roles temporales y no excluyentes asignados a la misma entidad Party.
+                Roles temporales y no excluyentes asignados al mismo Party.
                 <div class="ext-card-tags">
                   <span class="ext-tag">CLIENTE</span>
                   <span class="ext-tag">AVAL</span>
                   <span class="ext-tag">COBRADOR</span>
                   <span class="ext-tag">SUPERVISOR</span>
                 </div>
-                <div style="margin-top:6px; font-size:11px; color:#666;">
+                <div style="margin-top:4px; font-size:10.5px; color:#666;">
                   Vigencia: <code>fecha_desde</code> / <code>fecha_hasta</code>
                 </div>
               </div>
@@ -538,7 +606,7 @@
                   <span class="ext-tag">Cobrador atiende a Cliente</span>
                   <span class="ext-tag">Empresa emplea a Persona</span>
                 </div>
-                <div style="margin-top:6px; font-size:11px; color:#666;">
+                <div style="margin-top:4px; font-size:10.5px; color:#666;">
                   Trazabilidad de vigencia y garantías
                 </div>
               </div>
