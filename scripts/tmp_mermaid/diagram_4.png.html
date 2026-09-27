@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head><body style="margin:0;background:white;">
+<div class="mermaid">
+flowchart TD
+    A[Inicio: Solicitud de Microcrédito] --> B[Registro manual del cliente en Libreta/Excel de Clientes]
+    B --> C[Solicitud de Aval o Garante]
+    C --> D[Registro manual del aval en Libreta separada de Avales]
+    D --> E{¿El aval ya era cliente o aval de otro crédito?}
+    E -->|No se sabe / Ignorado| F[Se aprueba crédito a ciegas sin verificar riesgo acumulado]
+    F --> G[Desembolso del dinero en efectivo]
+    G --> H[Asignación informal de ruta al cobrador]
+    H --> I[Cobranza diaria en ruta con anotación en cartilla física]
+    I --> J{¿Cambio de cobrador en la ruta?}
+    J -->|Sí| K[Pérdida de historial de cobros y descuadre de liquidaciones]
+    J -->|No| L[Liquidación manual de caja]
+    K --> M[Fin del proceso con inconsistencias]
+    L --> M
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme: "neutral", securityLevel: "loose"});</script>
+</body></html>

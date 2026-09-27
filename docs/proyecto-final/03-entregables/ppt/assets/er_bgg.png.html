@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Modelo Conceptual y Lógico TO-BE — Patrón PARTY aplicado a BGG</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background-color: #FFFFFF;
+    font-family: Arial, 'Segoe UI', sans-serif;
+    color: #000000;
+    width: 2500px;
+    height: 1450px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Header Title */
+  .header-container {
+    padding: 30px 60px 10px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .main-title {
+    font-size: 34px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: #555555;
+    font-weight: 500;
+  }
+  .accent-bar {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #FFC000 0%, #0B1B3D 70%);
+    margin-top: 15px;
+  }
+
+  /* Canvas area for absolute positioning */
+  #diagram-canvas {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    width: 2500px;
+    height: 1160px;
+  }
+
+  /* SVG Overlay for Connections */
+  #connections-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2500px;
+    height: 1160px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Table Cards */
+  .table-card {
+    position: absolute;
+    width: 380px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  /* BORDERS */
+  .card-party-core {
+    border: 3.5px solid #FFC000;
+    box-shadow: 0 6px 18px rgba(255, 192, 0, 0.25), 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .card-bgg-core {
+    border: 3.5px solid #0B1B3D;
+    box-shadow: 0 6px 18px rgba(11, 27, 61, 0.25), 0 2px 6px rgba(0,0,0,0.06);
+  }
+
+  /* Card Header */
+  .table-header {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 11px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .table-header .table-name {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-family: Arial, 'Segoe UI', sans-serif;
+  }
+  .table-header .table-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .tag-party {
+    background-color: #FFC000;
+    color: #000000;
+  }
+  .tag-bgg {
+    background-color: #0B1B3D;
+    color: #FFFFFF;
+    border: 1px solid #FFC000;
+  }
+
+  /* Card Body */
+  .table-body {
+    background-color: #FFFFFF;
+  }
+  .col-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 14px;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 15px;
+    border-bottom: 1px solid #F0F0F0;
+    white-space: nowrap;
+  }
+  .col-row:last-child {
+    border-bottom: none;
+  }
+  .col-row:nth-child(even) {
+    background-color: #FAFBFD;
+  }
+  .col-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .col-name {
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+  .col-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .col-type {
+    color: #666666;
+    font-size: 14px;
+  }
+  .badges {
+    display: flex;
+    gap: 4px;
+  }
+  .badge {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-block;
+    line-height: 1;
+  }
+  .badge-pk {
+    background-color: #FFC000;
+    color: #000000;
+  }
+  .badge-fk {
+    background-color: #0B1B3D;
+    color: #FFFFFF;
+  }
+
+  /* Footer & Legend */
+  .footer-legend {
+    position: absolute;
+    bottom: 25px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8F9FB;
+    border: 1px solid #E2E6EE;
+    border-radius: 8px;
+    padding: 14px 28px;
+    z-index: 20;
+  }
+  .legend-items {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .legend-box {
+    width: 24px;
+    height: 16px;
+    border-radius: 4px;
+  }
+  .box-party {
+    border: 3.5px solid #FFC000;
+    background-color: #FFF3CC;
+  }
+  .box-bgg {
+    border: 3.5px solid #0B1B3D;
+    background-color: #FFFFFF;
+  }
+  .legend-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0B1B3D;
+  }
+  .legend-desc {
+    font-size: 14px;
+    color: #555555;
+    margin-left: 4px;
+    font-weight: normal;
+  }
+  .footer-note {
+    font-size: 14px;
+    color: #666666;
+    font-style: italic;
+  }
+
+  /* SVG Labels */
+  .rel-label {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    fill: #0B1B3D;
+  }
+  .rel-bg {
+    fill: #FFFFFF;
+    stroke: #D0D5DD;
+    stroke-width: 1.5;
+    rx: 4;
+    ry: 4;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header-container">
+    <div class="title-group">
+      <div class="main-title">Modelo Conceptual y Lógico TO-BE — Patrón PARTY aplicado a BGG</div>
+      <div class="subtitle">Desacoplamiento de Identidad y Roles con Trazabilidad Operativa para Microfinanzas</div>
+    </div>
+    <div style="font-size: 14px; color: #666; text-align: right;">
+      <strong>UPN — Base de Datos</strong> | Proyecto Final BGG
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+
+  <!-- Diagram Canvas -->
+  <div id="diagram-canvas">
+    <svg id="connections-svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#0B1B3D" />
+        </marker>
+        <marker id="arrow-gold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#D49B00" />
+        </marker>
+      </defs>
+      <g id="svg-paths-container"></g>
+    </svg>
+
+    <!-- COLUMN 1: PERIPHERAL PARTY TABLES -->
+    <!-- PERSON -->
+    <div id="tbl-person" class="table-card card-party-core" style="left: 60px; top: 20px;">
+      <div class="table-header">
+        <span class="table-name">PERSON</span>
+        <span class="table-tag tag-party">PARTY</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">first_name</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">last_name</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">birth_date</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">gender</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+      </div>
+    </div>
+
+    <!-- ORGANIZATION -->
+    <div id="tbl-organization" class="table-card card-party-core" style="left: 60px; top: 260px;">
+      <div class="table-header">
+        <span class="table-name">ORGANIZATION</span>
+        <span class="table-tag tag-party">PARTY</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">legal_name</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">trade_name</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">founding_date</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+      </div>
+    </div>
+
+    <!-- CONTACT_MECHANISM -->
+    <div id="tbl-contact_mechanism" class="table-card card-party-core" style="left: 60px; top: 480px;">
+      <div class="table-header">
+        <span class="table-name">CONTACT_MECHANISM</span>
+        <span class="table-tag tag-party">PARTY</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">contact_mechanism_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">type</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">value</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">purpose</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+      </div>
+    </div>
+
+    <!-- PARTY_IDENTIFIER -->
+    <div id="tbl-party_identifier" class="table-card card-party-core" style="left: 60px; top: 730px;">
+      <div class="table-header">
+        <span class="table-name">PARTY_IDENTIFIER</span>
+        <span class="table-tag tag-party">PARTY</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_identifier_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">id_type</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">id_value</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">issuing_authority</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">valid_from</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">valid_to</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+      </div>
+    </div>
+
+    <!-- COLUMN 2: HUB PARTY & RELATIONSHIPS -->
+    <!-- PARTY -->
+    <div id="tbl-party" class="table-card card-party-core" style="left: 560px; top: 120px;">
+      <div class="table-header" style="background: linear-gradient(135deg, #000000 70%, #222222 100%);">
+        <span class="table-name">PARTY (NÚCLEO)</span>
+        <span class="table-tag tag-party">BASE</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">party_type</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">status</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">created_at</span></div><div class="col-right"><span class="col-type">datetime</span></div></div>
+      </div>
+    </div>
+
+    <!-- PARTY_RELATIONSHIP -->
+    <div id="tbl-party_relationship" class="table-card card-party-core" style="left: 560px; top: 580px;">
+      <div class="table-header">
+        <span class="table-name">PARTY_RELATIONSHIP</span>
+        <span class="table-tag tag-party">PARTY</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_relationship_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">from_party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">to_party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">from_role</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">to_role</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">relationship_type</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">start_date</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">end_date</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+      </div>
+    </div>
+
+    <!-- COLUMN 3: PARTY_ROLE -->
+    <div id="tbl-party_role" class="table-card card-party-core" style="left: 1060px; top: 120px;">
+      <div class="table-header">
+        <span class="table-name">PARTY_ROLE</span>
+        <span class="table-tag tag-party">PARTY</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_role_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">party_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">role_type</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">start_date</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">end_date</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+      </div>
+    </div>
+
+    <!-- COLUMN 4: PRESTATARIO_DETAIL -->
+    <div id="tbl-prestatario_detail" class="table-card card-bgg-core" style="left: 1540px; top: 120px;">
+      <div class="table-header">
+        <span class="table-name">PRESTATARIO_DETAIL</span>
+        <span class="table-tag tag-bgg">BGG</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">party_role_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">linea_credito</span></div><div class="col-right"><span class="col-type">decimal</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">frecuencia_cuota</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">calificacion_riesgo</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+      </div>
+    </div>
+
+    <!-- COLUMN 5: CREDITO (TOP RIGHT) -->
+    <div id="tbl-credito" class="table-card card-bgg-core" style="left: 2020px; top: 120px;">
+      <div class="table-header">
+        <span class="table-name">CREDITO</span>
+        <span class="table-tag tag-bgg">BGG</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">credito_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">party_role_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">monto</span></div><div class="col-right"><span class="col-type">decimal</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">fecha_desembolso</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">estado</span></div><div class="col-right"><span class="col-type">varchar</span></div></div>
+      </div>
+    </div>
+
+    <!-- PAGO (MIDDLE RIGHT) -->
+    <div id="tbl-pago" class="table-card card-bgg-core" style="left: 1780px; top: 520px;">
+      <div class="table-header">
+        <span class="table-name">PAGO</span>
+        <span class="table-tag tag-bgg">BGG</span>
+      </div>
+      <div class="table-body">
+        <div class="col-row"><div class="col-left"><span class="col-name">pago_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-pk">PK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">credito_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">party_role_id</span></div><div class="col-right"><span class="col-type">bigint</span><div class="badges"><span class="badge badge-fk">FK</span></div></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">monto_pagado</span></div><div class="col-right"><span class="col-type">decimal</span></div></div>
+        <div class="col-row"><div class="col-left"><span class="col-name">fecha_pago</span></div><div class="col-right"><span class="col-type">date</span></div></div>
+      </div>
+    </div>
+
+  </div> <!-- End #diagram-canvas -->
+
+  <!-- Legend & Footer -->
+  <div class="footer-legend">
+    <div class="legend-items">
+      <div class="legend-item">
+        <div class="legend-box box-party"></div>
+        <div>
+          <span class="legend-label">Borde Dorado (#FFC000):</span>
+          <span class="legend-desc">Núcleo Genérico PARTY (identidad, subtipos persona/organización, identificadores, contactos, roles y relaciones)</span>
+        </div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box box-bgg"></div>
+        <div>
+          <span class="legend-label">Borde Azul Marino (#0B1B3D):</span>
+          <span class="legend-desc">Tablas Específicas del Negocio BGG (detalle prestatario, créditos originados y pagos de cobranza)</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">
+      * Arquitectura relacional desacoplada: cada persona u organización posee una única identidad física con múltiples roles concurrentes.
+    </div>
+  </div>
+
+  <script>
+    // Compute SVG connectors dynamically
+    function drawConnections() {
+      const canvas = document.getElementById('diagram-canvas');
+      const canvasRect = canvas.getBoundingClientRect();
+      const svgContainer = document.getElementById('svg-paths-container');
+
+      function getPoint(tblId, side, ratio = 0.5) {
+        const el = document.getElementById(tblId);
+        const r = el.getBoundingClientRect();
+        const x = r.left - canvasRect.left;
+        const y = r.top - canvasRect.top;
+        if (side === 'left') return { x: x, y: y + r.height * ratio };
+        if (side === 'right') return { x: x + r.width, y: y + r.height * ratio };
+        if (side === 'top') return { x: x + r.width * ratio, y: y };
+        if (side === 'bottom') return { x: x + r.width * ratio, y: y + r.height };
+      }
+
+      const connections = [
+        // PARTY -> PERSON (es)
+        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.20, to: 'tbl-person', toSide: 'right', toRatio: 0.5, label: 'es', marker: 'arrow-gold', color: '#D49B00' },
+        // PARTY -> ORGANIZATION (es)
+        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.45, to: 'tbl-organization', toSide: 'right', toRatio: 0.5, label: 'es', marker: 'arrow-gold', color: '#D49B00' },
+        // PARTY -> CONTACT_MECHANISM (tiene)
+        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.70, to: 'tbl-contact_mechanism', toSide: 'right', toRatio: 0.5, label: 'tiene', marker: 'arrow-gold', color: '#D49B00' },
+        // PARTY -> PARTY_IDENTIFIER (tiene)
+        { from: 'tbl-party', fromSide: 'left', fromRatio: 0.90, to: 'tbl-party_identifier', toSide: 'right', toRatio: 0.35, label: 'tiene', marker: 'arrow-gold', color: '#D49B00' },
+        // PARTY -> PARTY_RELATIONSHIP (participa)
+        { from: 'tbl-party', fromSide: 'bottom', fromRatio: 0.5, to: 'tbl-party_relationship', toSide: 'top', toRatio: 0.5, label: 'participa', marker: 'arrow-gold', color: '#D49B00' },
+        // PARTY -> PARTY_ROLE (ejerce)
+        { from: 'tbl-party', fromSide: 'right', fromRatio: 0.5, to: 'tbl-party_role', toSide: 'left', toRatio: 0.5, label: 'ejerce', marker: 'arrow-gold', color: '#D49B00' },
+        // PARTY_ROLE -> PRESTATARIO_DETAIL (detalla)
+        { from: 'tbl-party_role', fromSide: 'right', fromRatio: 0.5, to: 'tbl-prestatario_detail', toSide: 'left', toRatio: 0.5, label: 'detalla', marker: 'arrow', color: '#0B1B3D' },
+        // PRESTATARIO_DETAIL -> CREDITO (origina)
+        { from: 'tbl-prestatario_detail', fromSide: 'right', fromRatio: 0.5, to: 'tbl-credito', toSide: 'left', toRatio: 0.5, label: 'origina', marker: 'arrow', color: '#0B1B3D' },
+        // CREDITO -> PAGO (recibe)
+        { from: 'tbl-credito', fromSide: 'bottom', fromRatio: 0.45, to: 'tbl-pago', toSide: 'right', toRatio: 0.35, label: 'recibe', marker: 'arrow', color: '#0B1B3D', curve: 'elbow-right' },
+        // PARTY_ROLE -> PAGO (cobra)
+        { from: 'tbl-party_role', fromSide: 'bottom', fromRatio: 0.6, to: 'tbl-pago', toSide: 'left', toRatio: 0.5, label: 'cobra', marker: 'arrow', color: '#0B1B3D', curve: 'elbow-left' }
+      ];
+
+      connections.forEach(conn => {
+        const p1 = getPoint(conn.from, conn.fromSide, conn.fromRatio);
+        const p2 = getPoint(conn.to, conn.toSide, conn.toRatio);
+
+        let d = '';
+        let midX = (p1.x + p2.x) / 2;
+        let midY = (p1.y + p2.y) / 2;
+
+        if (conn.curve === 'elbow-right') {
+          // Down from credito, then left into right of pago
+          const cornerY = p2.y;
+          d = `M ${p1.x} ${p1.y} L ${p1.x} ${cornerY} L ${p2.x} ${cornerY}`;
+          midX = p1.x - 30;
+          midY = (p1.y + cornerY) / 2;
+        } else if (conn.curve === 'elbow-left') {
+          // Down from party_role, then right into left of pago
+          const cornerY = p2.y;
+          d = `M ${p1.x} ${p1.y} L ${p1.x} ${cornerY} L ${p2.x} ${cornerY}`;
+          midX = (p1.x + p2.x) / 2;
+          midY = cornerY;
+        } else if (conn.fromSide === 'left' && conn.toSide === 'right') {
+          // Smooth bezier curve or straight
+          const dx = Math.abs(p2.x - p1.x) * 0.4;
+          d = `M ${p1.x} ${p1.y} C ${p1.x - dx} ${p1.y}, ${p2.x + dx} ${p2.y}, ${p2.x} ${p2.y}`;
+        } else if (conn.fromSide === 'right' && conn.toSide === 'left') {
+          // Straight horizontal or gentle S
+          if (Math.abs(p1.y - p2.y) < 5) {
+            d = `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
+          } else {
+            const dx = Math.abs(p2.x - p1.x) * 0.5;
+            d = `M ${p1.x} ${p1.y} C ${p1.x + dx} ${p1.y}, ${p2.x - dx} ${p2.y}, ${p2.x} ${p2.y}`;
+          }
+        } else {
+          d = `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
+        }
+
+        // Create Path
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', conn.color);
+        path.setAttribute('stroke-width', '2.5');
+        path.setAttribute('marker-end', `url(#${conn.marker})`);
+        svgContainer.appendChild(path);
+
+        // Create Label
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.textContent = conn.label;
+        text.setAttribute('class', 'rel-label');
+        text.setAttribute('x', midX);
+        text.setAttribute('y', midY + 4);
+        text.setAttribute('text-anchor', 'middle');
+        
+        // Measure text approx
+        const textWidth = conn.label.length * 9 + 16;
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('class', 'rel-bg');
+        rect.setAttribute('x', midX - textWidth / 2);
+        rect.setAttribute('y', midY - 11);
+        rect.setAttribute('width', textWidth);
+        rect.setAttribute('height', 20);
+        rect.setAttribute('stroke', conn.color);
+
+        g.appendChild(rect);
+        g.appendChild(text);
+        svgContainer.appendChild(g);
+      });
+    }
+
+    window.onload = drawConnections;
+  </script>
+</body>
+</html>

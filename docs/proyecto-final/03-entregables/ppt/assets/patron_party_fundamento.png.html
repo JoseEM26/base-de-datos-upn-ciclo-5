@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, 'Segoe UI', sans-serif;
+    background-color: #FFFFFF;
+    color: #0B1B3D;
+    padding: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    width: 1560px;
+    background: #FFFFFF;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #ECEFF1;
+  }
+  .header h1 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 16px;
+    color: #666666;
+    font-weight: 500;
+  }
+  
+  .cards-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr 60px 1fr;
+    gap: 8px;
+    align-items: stretch;
+    margin-bottom: 26px;
+  }
+  
+  /* CONNECTOR ARROWS */
+  .connector {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .arrow-badge {
+    width: 44px;
+    height: 44px;
+    background: #FFF3CC;
+    border: 2px solid #FFC000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0B1B3D;
+    box-shadow: 0 4px 10px rgba(255, 192, 0, 0.2);
+  }
+  
+  /* CARDS */
+  .card {
+    background: #FFFFFF;
+    border: 2px solid #FFC000;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(11, 27, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+  .card-top {
+    background: linear-gradient(135deg, #0B1B3D, #193366);
+    color: #FFFFFF;
+    padding: 22px 20px;
+    text-align: center;
+    border-bottom: 3px solid #FFC000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-icon {
+    font-size: 46px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-question {
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFC000;
+    letter-spacing: -0.3px;
+  }
+  .card-concept {
+    font-size: 15px;
+    font-weight: 600;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 3px 12px;
+    border-radius: 12px;
+  }
+  
+  .card-body {
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+  .card-entities {
+    background: #FFF3CC;
+    border: 1px solid #FFE082;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #0B1B3D;
+    font-family: 'Consolas', 'Courier New', monospace;
+  }
+  .card-description {
+    font-size: 14px;
+    color: #444444;
+    line-height: 1.55;
+    flex: 1;
+  }
+  .card-highlights {
+    border-top: 1px solid #ECEFF1;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .highlight-item {
+    font-size: 12.5px;
+    color: #0B1B3D;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .highlight-bullet {
+    color: #FFC000;
+    font-size: 16px;
+  }
+  
+  .card-footer {
+    background: #FAFAFA;
+    border-top: 1px solid #ECEFF1;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #0B1B3D;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* BOTTOM SUMMARY BAR */
+  .summary-bar {
+    background: #FFF3CC;
+    border: 1.5px solid #FFC000;
+    border-radius: 10px;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(255, 192, 0, 0.12);
+  }
+  .summary-text {
+    font-size: 13.5px;
+    color: #0B1B3D;
+    font-weight: 600;
+  }
+  .summary-pill {
+    background: #0B1B3D;
+    color: #FFC000;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Fundamento del Patrón PARTY (Silverston, 2001)</h1>
+    <p>Desacoplamiento Ontológico: 3 Preguntas Clave para el Modelado de Personas y Organizaciones</p>
+  </div>
+  
+  <div class="cards-row">
+    <!-- CARD 1 -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">🪪</div>
+        <div class="card-question">¿Quién existe?</div>
+        <div class="card-concept">Identidad Ontológica</div>
+      </div>
+      <div class="card-body">
+        <div class="card-entities">PARTY • PERSON • ORGANIZATION</div>
+        <div class="card-description">
+          Representa la existencia inmutable del individuo o institución en el mundo real, con total independencia de los vínculos contractuales o comerciales que mantenga con la entidad.
+        </div>
+        <div class="card-highlights">
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Inmutable en el tiempo</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Cero duplicación de identidad</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Contacto centralizado y único</div>
+        </div>
+      </div>
+      <div class="card-footer">Dimensión Ontológica</div>
+    </div>
+    
+    <!-- ARROW 1 -->
+    <div class="connector">
+      <div class="arrow-badge">➔</div>
+    </div>
+    
+    <!-- CARD 2 -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">🎭</div>
+        <div class="card-question">¿Qué función ejerce?</div>
+        <div class="card-concept">Rol Temporal de Negocio</div>
+      </div>
+      <div class="card-body">
+        <div class="card-entities">PARTY_ROLE • CUSTOMER / AVAL / COLLECTOR</div>
+        <div class="card-description">
+          Define el papel o capacidad operativa que ejerce la parte en un periodo determinado. Una misma persona puede asumir múltiples roles simultáneos sin alterar su identidad.
+        </div>
+        <div class="card-highlights">
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Dinámico y no excluyente</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Rango de fechas (vigencia)</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Auditoría histórica completa</div>
+        </div>
+      </div>
+      <div class="card-footer">Dimensión Funcional</div>
+    </div>
+    
+    <!-- ARROW 2 -->
+    <div class="connector">
+      <div class="arrow-badge">➔</div>
+    </div>
+    
+    <!-- CARD 3 -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">🔗</div>
+        <div class="card-question">¿Con quién se relaciona?</div>
+        <div class="card-concept">Vínculo Dirigido y Fechado</div>
+      </div>
+      <div class="card-body">
+        <div class="card-entities">PARTY_RELATIONSHIP • FROM / TO</div>
+        <div class="card-description">
+          Modela asociaciones contextuales dirigidas entre dos partes (ej. Aval garantiza a Cliente, Cobrador asignado a Cliente, Persona empleada por Organización).
+        </div>
+        <div class="card-highlights">
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Vínculos dirigidos (origen / destino)</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Vigencia histórica del vínculo</div>
+          <div class="highlight-item"><span class="highlight-bullet">✓</span> Red relacional y de garantías</div>
+        </div>
+      </div>
+      <div class="card-footer">Dimensión Relacional</div>
+    </div>
+  </div>
+  
+  <div class="summary-bar">
+    <div class="summary-text">
+      <strong>Principio de Responsabilidad Única (SRP):</strong> Separar existencia, rol y relación elimina la redundancia de datos y permite al modelo evolucionar sin romper esquemas.
+    </div>
+    <div class="summary-pill">ARQUITECTURA DE DATOS BGG</div>
+  </div>
+</div>
+</body>
+</html>

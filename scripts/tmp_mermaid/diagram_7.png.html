@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head><body style="margin:0;background:white;">
+<div class="mermaid">
+flowchart LR
+    subgraph SGBD_Security ["Seguridad a Nivel de Motor SQL Server"]
+        L1[Login: usr_admin_bgg] --> U1[User: usr_admin] --> R1[Rol BD: rol_administrador]
+        L2[Login: usr_cobrador_01] --> U2[User: usr_cobr01] --> R2[Rol BD: rol_cobrador]
+        L3[Login: usr_auditor_ext] --> U3[User: usr_audit] --> R3[Rol BD: rol_auditor]
+    end
+
+    subgraph Permisos_DCL ["Permisos Granulares DCL"]
+        R1 -->|CONTROL TOTAL| DB[(BGG_Microcreditos)]
+        R2 -->|SELECT / INSERT| P_T[PAGO, CREDITO, Vistas de Ruta]
+        R3 -->|SELECT ONLY| AUD[Vistas y Tablas de Auditoría]
+    end
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme: "neutral", securityLevel: "loose"});</script>
+</body></html>

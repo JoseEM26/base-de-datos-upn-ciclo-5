@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head><body style="margin:0;background:white;">
+<div class="mermaid">
+flowchart TD
+    A[Inicio: Solicitud de Microcrédito] --> B[Búsqueda u homologación de Identidad única en PARTY]
+    B --> C{¿Existe la Persona en PARTY?}
+    C -->|No| D[Crear PARTY + PERSON + PARTY_IDENTIFIER con DNI/RUC]
+    C -->|Sí| E[Reutilizar party_id existente]
+    D --> F[Asignar PARTY_ROLE = 'PRESTATARIO']
+    E --> F
+    F --> G[Registrar Aval en PARTY_RELATIONSHIP con tipo 'AVAL']
+    G --> H{Validar RN-03 y RN-04: ¿No auto-aval y máx. 3 avales activos?}
+    H -->|Rechazado| I[Denegar solicitud o exigir cambio de aval]
+    H -->|Aprobado| J[Registrar CREDITO vinculado a PRESTATARIO_DETAIL]
+    J --> K[Asignar Cobrador vía PARTY_RELATIONSHIP 'COBRANZA_ASIGNADA']
+    K --> L[Cobranza diaria: Inserción atómica de PAGO con cobrador y crédito]
+    L --> M[Actualización automática de saldo y estado de cuota]
+    M --> N[Fin del proceso con trazabilidad y auditoría total]
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme: "neutral", securityLevel: "loose"});</script>
+</body></html>

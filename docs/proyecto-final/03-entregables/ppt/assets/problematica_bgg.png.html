@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Arial, 'Segoe UI', sans-serif;
+    background-color: #FFFFFF;
+    color: #0B1B3D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px;
+  }
+  .infographic-container {
+    width: 1540px;
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 44px 48px;
+    box-shadow: 0 16px 44px rgba(11, 27, 61, 0.08);
+    border: 1px solid #ECEEF2;
+  }
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 34px;
+    border-bottom: 2px solid #F0F2F5;
+    padding-bottom: 20px;
+  }
+  .header-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .badge {
+    align-self: flex-start;
+    background-color: #0B1B3D;
+    color: #FFC000;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+  .title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    font-size: 17px;
+    color: #666666;
+    font-weight: 400;
+  }
+  .tag-status {
+    background: #FFF3CC;
+    border: 1.5px solid #FFC000;
+    color: #0B1B3D;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(255, 192, 0, 0.15);
+  }
+
+  /* Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 30px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1.5px solid #EAECEF;
+    box-shadow: 0 10px 24px rgba(11, 27, 61, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #FFC000;
+  }
+  .stat-card.problem-card {
+    border: 2px solid #FFC000;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF5 100%);
+    box-shadow: 0 12px 30px rgba(255, 192, 0, 0.16);
+  }
+  .stat-card.problem-card::before {
+    background: #FFC000;
+    height: 6px;
+  }
+  .icon-wrapper {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background-color: #F8F9FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    margin-bottom: 18px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .problem-card .icon-wrapper {
+    background-color: #FFF3CC;
+    border: 1px solid rgba(255, 192, 0, 0.5);
+  }
+  .stat-number {
+    font-size: 50px;
+    font-weight: 900;
+    color: #0B1B3D;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+  .stat-number.text-headline {
+    font-size: 27px;
+    font-weight: 800;
+    color: #0B1B3D;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .stat-label {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.45;
+    font-weight: 500;
+    flex-grow: 1;
+  }
+  .stat-label strong {
+    color: #0B1B3D;
+  }
+  .source-tag {
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* Wide Banner */
+  .highlight-banner {
+    background-color: #FFF3CC;
+    border: 2px solid #FFC000;
+    border-radius: 18px;
+    padding: 24px 34px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    box-shadow: 0 8px 24px rgba(255, 192, 0, 0.14);
+  }
+  .banner-icon-box {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    background-color: #FFC000;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 192, 0, 0.35);
+  }
+  .banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .banner-tag {
+    font-size: 12px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .banner-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0B1B3D;
+    line-height: 1.45;
+  }
+</style>
+</head>
+<body>
+<div class="infographic-container">
+  <div class="header-section">
+    <div class="header-titles">
+      <div class="badge">Diagnóstico de Negocio & Operación</div>
+      <h1 class="title">Problemática Identificada: Del Fenómeno Nacional a BGG</h1>
+      <p class="subtitle">Magnitud del crédito informal en el Perú y quiebre del modelo de información actual</p>
+    </div>
+    <div class="tag-status">
+      <span>⚙️</span> Estado AS-IS
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <!-- Card 1 -->
+    <div class="stat-card">
+      <div class="icon-wrapper">📈</div>
+      <div class="stat-number">35%</div>
+      <div class="stat-label">del crédito informal en Perú es <strong>"gota a gota"</strong> (IPE, 2024)</div>
+      <div class="source-tag">Mercado Nacional</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="stat-card">
+      <div class="icon-wrapper">💸</div>
+      <div class="stat-number">+1,400%</div>
+      <div class="stat-label">tasa de interés anual en <strong>préstamos informales</strong></div>
+      <div class="source-tag">Sobrecosto Financiero</div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="stat-card">
+      <div class="icon-wrapper">🔍</div>
+      <div class="stat-number">211,000</div>
+      <div class="stat-label"><strong>familias peruanas</strong> afectadas por este esquema</div>
+      <div class="source-tag">Dimensión Social</div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="stat-card problem-card">
+      <div class="icon-wrapper">⚠️</div>
+      <div class="stat-number text-headline">Identidad duplicada</div>
+      <div class="stat-label">un mismo cliente puede ser <strong>aval o cobrador</strong> sin que el sistema lo detecte</div>
+      <div class="source-tag" style="color: #0B1B3D; font-weight: 800;">Quiebre en BGG</div>
+    </div>
+  </div>
+
+  <!-- Wide Banner -->
+  <div class="highlight-banner">
+    <div class="banner-icon-box">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0B1B3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+      </svg>
+    </div>
+    <div class="banner-content">
+      <div class="banner-tag">Diagnóstico del Sistema Actual (AS-IS)</div>
+      <div class="banner-text">
+        BGG gestiona esta información hoy en registros dispersos por rol: sin trazabilidad de avales, sin historial de cobranza, con riesgo de sobreendeudamiento no detectado.
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

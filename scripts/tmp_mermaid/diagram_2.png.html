@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head><body style="margin:0;background:white;">
+<div class="mermaid">
+flowchart TD
+    subgraph Nucleo_Identidad ["1. ¿Quién Existe? (Identidad Ontológica Inmutable)"]
+        P[PARTY: party_id, party_type, status, created_at]
+        PER[PERSON: party_id, first_name, last_name, birth_date, gender]
+        ORG[ORGANIZATION: party_id, legal_name, trade_name, founding_date]
+        P -->|1:0..1| PER
+        P -->|1:0..1| ORG
+    end
+
+    subgraph Satelites_Identidad ["Atributos y Mecanismos de Contacto"]
+        PID[PARTY_IDENTIFIER: id_type, id_value, issuing_authority, valid_from, valid_to]
+        CM[CONTACT_MECHANISM: type, value, purpose]
+        P -->|1:N| PID
+        P -->|1:N| CM
+    end
+
+    subgraph Roles_Negocio ["2. ¿Qué Función Ejerce? (Roles Dinámicos y Temporales)"]
+        PR[PARTY_ROLE: party_role_id, role_type, start_date, end_date]
+        P -->|1:N| PR
+        PD[PRESTATARIO_DETAIL: linea_credito, frecuencia_cuota, calificacion_riesgo]
+        PR -->|1:0..1| PD
+    end
+
+    subgraph Relaciones_Dirigidas ["3. ¿Con Quién se Relaciona? (Grafo Dirigido Fechado)"]
+        PREL[PARTY_RELATIONSHIP: from_party_id, to_party_id, from_role, to_role, relationship_type, start_date, end_date]
+        P -->|1:N| PREL
+    end
+
+    subgraph Transacciones_BGG ["Módulo Transaccional de Microcréditos"]
+        CR[CREDITO: monto, fecha_desembolso, estado]
+        PG[PAGO: monto_pagado, fecha_pago]
+        PD -->|1:N| CR
+        CR -->|1:N| PG
+        PR -.->|Cobra| PG
+    end
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme: "neutral", securityLevel: "loose"});</script>
+</body></html>

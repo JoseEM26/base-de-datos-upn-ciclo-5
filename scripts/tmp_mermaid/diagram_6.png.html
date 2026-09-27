@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head><body style="margin:0;background:white;">
+<div class="mermaid">
+erDiagram
+    PARTY ||--o| PERSON : es
+    PARTY ||--o| ORGANIZATION : es
+    PARTY ||--o{ PARTY_IDENTIFIER : tiene
+    PARTY ||--o{ CONTACT_MECHANISM : tiene
+    PARTY ||--o{ PARTY_ROLE : ejerce
+    PARTY ||--o{ PARTY_RELATIONSHIP : participa
+    PARTY_ROLE ||--o| PRESTATARIO_DETAIL : detalla
+    PRESTATARIO_DETAIL ||--o{ CREDITO : origina
+    CREDITO ||--o{ PAGO : recibe
+    PARTY_ROLE ||--o{ PAGO : cobra
+
+    PARTY {
+        bigint party_id PK
+        varchar party_type
+        varchar status
+        datetime created_at
+    }
+    PERSON {
+        bigint party_id PK
+        varchar first_name
+        varchar last_name
+        date birth_date
+        varchar gender
+    }
+    ORGANIZATION {
+        bigint party_id PK
+        varchar legal_name
+        varchar trade_name
+        date founding_date
+    }
+    PARTY_IDENTIFIER {
+        bigint party_identifier_id PK
+        bigint party_id FK
+        varchar id_type
+        varchar id_value
+        varchar issuing_authority
+        date valid_from
+        date valid_to
+    }
+    CONTACT_MECHANISM {
+        bigint contact_mechanism_id PK
+        bigint party_id FK
+        varchar type
+        varchar value
+        varchar purpose
+    }
+    PARTY_ROLE {
+        bigint party_role_id PK
+        bigint party_id FK
+        varchar role_type
+        date start_date
+        date end_date
+    }
+    PARTY_RELATIONSHIP {
+        bigint party_relationship_id PK
+        bigint from_party_id FK
+        bigint to_party_id FK
+        varchar from_role
+        varchar to_role
+        varchar relationship_type
+        date start_date
+        date end_date
+    }
+    PRESTATARIO_DETAIL {
+        bigint party_role_id PK
+        decimal linea_credito
+        varchar frecuencia_cuota
+        varchar calificacion_riesgo
+    }
+    CREDITO {
+        bigint credito_id PK
+        bigint party_role_id FK
+        decimal monto
+        date fecha_desembolso
+        varchar estado
+    }
+    PAGO {
+        bigint pago_id PK
+        bigint credito_id FK
+        bigint party_role_id FK
+        decimal monto_pagado
+        date fecha_pago
+    }
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme: "neutral", securityLevel: "loose"});</script>
+</body></html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, 'Segoe UI', sans-serif;
+    background-color: #FFFFFF;
+    color: #0B1B3D;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    width: 1560px;
+    background: #FFFFFF;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #ECEFF1;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0B1B3D;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 16px;
+    color: #666666;
+    font-weight: 500;
+  }
+  
+  .panels-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  /* PANEL AS-IS */
+  .panel-as-is {
+    border: 2px solid #B00020;
+    border-radius: 12px;
+    background: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(176, 0, 32, 0.07);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .panel-header-as-is {
+    background: linear-gradient(135deg, #B00020, #8E0017);
+    color: #FFFFFF;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .panel-header-as-is h2 {
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .badge-warning {
+    background: #FFFFFF;
+    color: #B00020;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .panel-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+  
+  /* TABLES AS-IS */
+  .tables-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .table-card {
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #FAFAFA;
+  }
+  .table-header {
+    background: #ECEFF1;
+    color: #0B1B3D;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 7px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  .table-header span.tag {
+    font-size: 11px;
+    color: #666666;
+    font-weight: normal;
+  }
+  .table-rows {
+    padding: 8px 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    font-size: 12px;
+  }
+  .col-item {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    padding: 5px 8px;
+    border-radius: 4px;
+    color: #333333;
+    font-family: 'Consolas', 'Courier New', monospace;
+  }
+  .col-pk {
+    border-left: 3px solid #0B1B3D;
+    font-weight: 700;
+  }
+  .col-duplicated {
+    border: 1px dashed #B00020;
+    background: #FDEDEC;
+    color: #B00020;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .col-duplicated::after {
+    content: "⚠️ Repetido";
+    font-size: 9px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* WARNING FOOTER */
+  .warning-box {
+    background: #FDF2E9;
+    border-left: 4px solid #B00020;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-top: auto;
+  }
+  .warning-box h4 {
+    color: #B00020;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .warning-box ul {
+    list-style: none;
+    font-size: 12px;
+    color: #4A151B;
+    line-height: 1.5;
+  }
+  .warning-box li {
+    margin-bottom: 4px;
+  }
+  
+  /* CENTER DIVIDER */
+  .divider-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .divider-line {
+    position: absolute;
+    width: 2px;
+    height: 90%;
+    background: #ECEFF1;
+    z-index: 1;
+  }
+  .divider-badge {
+    position: relative;
+    z-index: 2;
+    background: #0B1B3D;
+    color: #FFFFFF;
+    border: 2px solid #FFC000;
+    border-radius: 50px;
+    padding: 16px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(11, 27, 61, 0.2);
+  }
+  .divider-badge .icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .divider-badge .text {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #FFC000;
+  }
+  .divider-badge .arrow {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFC000;
+    margin-top: 4px;
+  }
+  
+  /* PANEL TO-BE */
+  .panel-to-be {
+    border: 2px solid #FFC000;
+    border-radius: 12px;
+    background: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(255, 192, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .panel-header-to-be {
+    background: linear-gradient(135deg, #0B1B3D, #193366);
+    color: #FFFFFF;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #FFC000;
+  }
+  .panel-header-to-be h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+  .badge-success {
+    background: #FFC000;
+    color: #0B1B3D;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  /* PARTY STRUCTURE */
+  .party-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .party-core {
+    background: #FFF3CC;
+    border: 2px solid #FFC000;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(255, 192, 0, 0.1);
+  }
+  .party-core-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .party-core-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0B1B3D;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .party-core-pill {
+    background: #0B1B3D;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+  .party-subtypes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .subtype-box {
+    background: #FFFFFF;
+    border: 1px solid #FFE082;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .subtype-name {
+    font-weight: 700;
+    color: #0B1B3D;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .subtype-cols {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 11px;
+    color: #444444;
+  }
+  
+  .party-extensions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .ext-card {
+    background: #FAFAFA;
+    border: 1px solid #CFD8DC;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ext-card-header {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0B1B3D;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid #ECEFF1;
+    padding-bottom: 4px;
+  }
+  .ext-card-content {
+    font-size: 11.5px;
+    color: #444444;
+    line-height: 1.4;
+  }
+  .ext-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .ext-tag {
+    background: #E8EAF6;
+    color: #0B1B3D;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  /* SUCCESS FOOTER */
+  .success-box {
+    background: #F4FBF7;
+    border-left: 4px solid #2E7D32;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-top: auto;
+  }
+  .success-box h4 {
+    color: #2E7D32;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .success-box ul {
+    list-style: none;
+    font-size: 12px;
+    color: #1B4D20;
+    line-height: 1.5;
+  }
+  .success-box li {
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>AS-IS vs TO-BE: Modelo de Datos</h1>
+    <p>Evolución de Arquitectura Relacional Convencional hacia Patrón de Identidad PARTY (Silverston)</p>
+  </div>
+  
+  <div class="panels-wrapper">
+    <!-- PANEL AS-IS -->
+    <div class="panel-as-is">
+      <div class="panel-header-as-is">
+        <h2>AS-IS: Modelo Relacional Convencional</h2>
+        <div class="badge-warning">⚠️ Problemas Estructurales</div>
+      </div>
+      <div class="panel-body">
+        <div class="tables-grid">
+          <!-- CLIENTES -->
+          <div class="table-card">
+            <div class="table-header">
+              <span>📋 Tabla: CLIENTES</span>
+              <span class="tag">Una tabla por rol</span>
+            </div>
+            <div class="table-rows">
+              <div class="col-item col-pk">id_cliente (PK)</div>
+              <div class="col-item col-duplicated">nombre / apellido</div>
+              <div class="col-item col-duplicated">documento (DNI)</div>
+              <div class="col-item col-duplicated">telefono</div>
+              <div class="col-item col-duplicated">direccion</div>
+              <div class="col-item">limite_credito</div>
+            </div>
+          </div>
+          
+          <!-- AVALES -->
+          <div class="table-card">
+            <div class="table-header">
+              <span>📋 Tabla: AVALES</span>
+              <span class="tag">Una tabla por rol</span>
+            </div>
+            <div class="table-rows">
+              <div class="col-item col-pk">id_aval (PK)</div>
+              <div class="col-item col-duplicated">nombre / apellido</div>
+              <div class="col-item col-duplicated">documento (DNI)</div>
+              <div class="col-item col-duplicated">telefono</div>
+              <div class="col-item col-duplicated">direccion</div>
+              <div class="col-item">ingreso_mensual</div>
+            </div>
+          </div>
+          
+          <!-- COBRADORES -->
+          <div class="table-card">
+            <div class="table-header">
+              <span>📋 Tabla: COBRADORES</span>
+              <span class="tag">Una tabla por rol</span>
+            </div>
+            <div class="table-rows">
+              <div class="col-item col-pk">id_cobrador (PK)</div>
+              <div class="col-item col-duplicated">nombre / apellido</div>
+              <div class="col-item col-duplicated">documento (DNI)</div>
+              <div class="col-item col-duplicated">telefono</div>
+              <div class="col-item col-duplicated">direccion</div>
+              <div class="col-item">zona_asignada</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- WARNING BOX -->
+        <div class="warning-box">
+          <h4>⚠️ Patologías del Modelo Convencional:</h4>
+          <ul>
+            <li>• <strong>Datos duplicados:</strong> Si un cliente también es aval o cobrador, sus datos se triplican en BD.</li>
+            <li>• <strong>Sin historial (amnesia):</strong> Si un cobrador es despedido o un aval cambia, se sobreescribe el registro.</li>
+            <li>• <strong>Inconsistencia operacional:</strong> Actualizar el teléfono en CLIENTES no actualiza AVALES ni COBRADORES.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CENTER DIVIDER -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+      <div class="divider-badge">
+        <span class="icon">🔄</span>
+        <span class="text">MIGRACIÓN</span>
+        <span class="arrow">➔</span>
+      </div>
+    </div>
+    
+    <!-- PANEL TO-BE -->
+    <div class="panel-to-be">
+      <div class="panel-header-to-be">
+        <h2>TO-BE: Patrón PARTY</h2>
+        <div class="badge-success">✅ Arquitectura Escalable</div>
+      </div>
+      <div class="panel-body">
+        <div class="party-layout">
+          <!-- CORE PARTY -->
+          <div class="party-core">
+            <div class="party-core-header">
+              <div class="party-core-title">
+                <span>🪪 PARTY (Identidad Única)</span>
+              </div>
+              <div class="party-core-pill">party_id (PK) • Único en el Sistema</div>
+            </div>
+            <div class="party-subtypes">
+              <div class="subtype-box">
+                <div class="subtype-name">👤 PERSON (Subtipo)</div>
+                <div class="subtype-cols">nombres, apellidos, tipo_doc, num_doc, fecha_nacimiento</div>
+              </div>
+              <div class="subtype-box">
+                <div class="subtype-name">🏢 ORGANIZATION (Subtipo)</div>
+                <div class="subtype-cols">razon_social, ruc, nombre_comercial, tipo_organizacion</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- EXTENSIONS -->
+          <div class="party-extensions">
+            <!-- ROLES -->
+            <div class="ext-card">
+              <div class="ext-card-header">
+                <span>🎭 PARTY_ROLE (Roles)</span>
+              </div>
+              <div class="ext-card-content">
+                <strong>¿Qué función ejerce?</strong><br>
+                Roles temporales y no excluyentes asignados a la misma entidad Party.
+                <div class="ext-card-tags">
+                  <span class="ext-tag">CLIENTE</span>
+                  <span class="ext-tag">AVAL</span>
+                  <span class="ext-tag">COBRADOR</span>
+                  <span class="ext-tag">SUPERVISOR</span>
+                </div>
+                <div style="margin-top:6px; font-size:11px; color:#666;">
+                  Vigencia: <code>fecha_desde</code> / <code>fecha_hasta</code>
+                </div>
+              </div>
+            </div>
+            
+            <!-- RELATIONSHIPS -->
+            <div class="ext-card">
+              <div class="ext-card-header">
+                <span>🔗 PARTY_RELATIONSHIP</span>
+              </div>
+              <div class="ext-card-content">
+                <strong>¿Con quién se relaciona?</strong><br>
+                Vínculos dirigidos y contextuales entre dos entidades Party.
+                <div class="ext-card-tags">
+                  <span class="ext-tag">Aval garantiza a Cliente</span>
+                  <span class="ext-tag">Cobrador atiende a Cliente</span>
+                  <span class="ext-tag">Empresa emplea a Persona</span>
+                </div>
+                <div style="margin-top:6px; font-size:11px; color:#666;">
+                  Trazabilidad de vigencia y garantías
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- SUCCESS BOX -->
+        <div class="success-box">
+          <h4>✅ Beneficios Arquitecturales Alcanzados:</h4>
+          <ul>
+            <li>• <strong>Identidad centralizada:</strong> Cada persona física existe exactamente una vez; contacto universal.</li>
+            <li>• <strong>Trazabilidad histórica:</strong> Roles y vínculos con vigencia explícita; auditoría total sin amnesia.</li>
+            <li>• <strong>Polimorfismo natural:</strong> Un cliente puede ser garante o cobrador sin alterar esquemas ni duplicar filas.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
