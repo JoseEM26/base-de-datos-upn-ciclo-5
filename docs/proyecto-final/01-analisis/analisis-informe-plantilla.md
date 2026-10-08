@@ -2,7 +2,7 @@
 
 > **Curso:** Base de Datos  
 > **Carrera:** Ingeniería de Sistemas Computacionales – UPN  
-> **Periodo:** 2026-1 (Sede San de Lurigancho – Perú)  
+> **Periodo:** 2026-1 (Sede San Juan de Lurigancho – Perú)  
 > **Archivo analizado:** `informe_plantilla_extraido.txt` (origen: `2026-1_ISC-Informe_Proyecto Final_Base de Datos.docx`)
 
 ---
