@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura de Datos BGG: Patrón PARTY en Estrella (Hub-and-Spoke)",
+    "output": "diagrama-estrella-bgg.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "party",
+      "type": "database",
+      "icon": "database",
+      "label": "party (Hub Central)",
+      "sublabel": "Identidad BGG (INSERT inicial)",
+      "tag": "INSERT party | UPDATE status",
+      "pos": [400, 340],
+      "size": [220, 75]
+    },
+    {
+      "id": "person",
+      "type": "database",
+      "icon": "person",
+      "label": "person (Subtipo CTI)",
+      "sublabel": "Naturales (INSERT atómico CTI)",
+      "tag": "INSERT CTI | UPDATE biografía",
+      "pos": [140, 160],
+      "size": [220, 75]
+    },
+    {
+      "id": "organization",
+      "type": "database",
+      "icon": "briefcase",
+      "label": "organization (Subtipo CTI)",
+      "sublabel": "Jurídicas (INSERT atómico CTI)",
+      "tag": "INSERT CTI | UPDATE razón social",
+      "pos": [660, 160],
+      "size": [220, 75]
+    },
+    {
+      "id": "party_identifier",
+      "type": "database",
+      "icon": "security",
+      "label": "party_identifier",
+      "sublabel": "Documentos (SELECT por id)",
+      "tag": "INSERT multi-doc | SELECT id",
+      "pos": [40, 340],
+      "size": [220, 75]
+    },
+    {
+      "id": "contact_mechanism",
+      "type": "database",
+      "icon": "active",
+      "label": "contact_mechanism",
+      "sublabel": "Contacto (INSERT canales)",
+      "tag": "INSERT canal | UPDATE contacto",
+      "pos": [140, 520],
+      "size": [220, 75]
+    },
+    {
+      "id": "party_relationship",
+      "type": "database",
+      "icon": "clock",
+      "label": "party_relationship",
+      "sublabel": "Grafo avales (SELECT recursivo)",
+      "tag": "INSERT vínculo | UPDATE end_date",
+      "pos": [660, 520],
+      "size": [220, 75]
+    },
+    {
+      "id": "party_role",
+      "type": "database",
+      "icon": "flag",
+      "label": "party_role",
+      "sublabel": "Roles BGG (UPDATE end_date)",
+      "tag": "INSERT rol | UPDATE end_date",
+      "pos": [760, 340],
+      "size": [220, 75]
+    },
+    {
+      "id": "prestatario_detail",
+      "type": "database",
+      "icon": "database",
+      "label": "prestatario_detail",
+      "sublabel": "Línea y riesgo (UPDATE eval.)",
+      "tag": "INSERT detalle | UPDATE riesgo",
+      "pos": [1120, 220],
+      "size": [220, 75]
+    },
+    {
+      "id": "credito",
+      "type": "database",
+      "icon": "database",
+      "label": "credito",
+      "sublabel": "Microcrédito (INSERT frecuente)",
+      "tag": "INSERT crédito | UPDATE estado",
+      "pos": [1440, 220],
+      "size": [220, 75]
+    },
+    {
+      "id": "pago",
+      "type": "database",
+      "icon": "success",
+      "label": "pago",
+      "sublabel": "Cobranza (INSERT cuota diaria)",
+      "tag": "INSERT diario | SELECT SUM saldo",
+      "pos": [1440, 440],
+      "size": [220, 75]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Núcleo de Identidad PARTY (Genérico)",
+      "wraps": [
+        "party",
+        "person",
+        "organization",
+        "party_identifier",
+        "contact_mechanism",
+        "party_role",
+        "party_relationship"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Módulo Financiero BGG (Específico del Negocio)",
+      "wraps": [
+        "prestatario_detail",
+        "credito",
+        "pago"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "party-to-identifier",
+      "from": "party",
+      "to": "party_identifier",
+      "label": "1:N identificadores",
+      "fromSide": "left",
+      "toSide": "right",
+      "variant": "default"
+    },
+    {
+      "id": "party-to-person",
+      "from": "party",
+      "to": "person",
+      "label": "CTI 1:1 (natural)",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "variant": "default"
+    },
+    {
+      "id": "party-to-organization",
+      "from": "party",
+      "to": "organization",
+      "label": "CTI 1:1 (jurídica)",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "variant": "default"
+    },
+    {
+      "id": "party-to-role",
+      "from": "party",
+      "to": "party_role",
+      "label": "1:N ejerce roles",
+      "fromSide": "right",
+      "toSide": "left",
+      "variant": "emphasis"
+    },
+    {
+      "id": "party-to-contact",
+      "from": "party",
+      "to": "contact_mechanism",
+      "label": "1:N canales contacto",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "variant": "default"
+    },
+    {
+      "id": "party-to-relationship",
+      "from": "party",
+      "to": "party_relationship",
+      "label": "1:N participa vínculos",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "variant": "emphasis"
+    },
+    {
+      "id": "role-to-detail",
+      "from": "party_role",
+      "to": "prestatario_detail",
+      "label": "detalla PRESTATARIO",
+      "fromSide": "right",
+      "toSide": "left",
+      "variant": "default"
+    },
+    {
+      "id": "detail-to-credito",
+      "from": "prestatario_detail",
+      "to": "credito",
+      "label": "origina desembolsos",
+      "fromSide": "right",
+      "toSide": "left",
+      "variant": "emphasis"
+    },
+    {
+      "id": "credito-to-pago",
+      "from": "credito",
+      "to": "pago",
+      "label": "recibe cuotas",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "variant": "default"
+    },
+    {
+      "id": "role-to-pago",
+      "from": "party_role",
+      "to": "pago",
+      "label": "cobra cuota diaria",
+      "fromSide": "right",
+      "toSide": "left",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Beneficios del Patrón PARTY (§5)",
+      "items": [
+        "Cero duplicación de identidad: Una persona o empresa conserva un único party_id de por vida, aunque acumule simultáneamente roles de cliente, prestatario, aval o cobrador.",
+        "Extensibilidad sin migraciones DDL: Agregar nuevos documentos (ej. CE), roles o relaciones entre partes se efectúa mediante INSERTs, sin alterar la estructura de tablas.",
+        "Auditoría temporal inmanente: start_date y end_date permiten reconstruir con exactitud el estado del negocio en cualquier fecha histórica, sin amnesia transaccional.",
+        "Esquema limpio en 3FN/BCNF: Elimina las columnas NULL masivas del modelo ingenuo mediante herencia Class Table Inheritance (CTI) en person y organization."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Trade-offs y Contras (§6)",
+      "items": [
+        "Sobrecarga de JOINs: Consultas cotidianas requieren unir party con party_role, person, party_identifier y credito, aumentando el costo de procesamiento relacional.",
+        "Curva de aprendizaje conceptual: No existen tablas simples 'clientes' o 'proveedores', lo que exige mayor comprensión técnica del equipo y sustento riguroso.",
+        "Complejidad en reportes: Demanda vistas materializadas o de consulta (ej. vw_prestatarios_activos) para simplificar consultas analíticas y reportería diaria.",
+        "Disciplina de vigencias: Requiere validaciones estrictas en capa de aplicación o triggers para evitar solapamientos temporales de roles activos."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Operaciones DML Típicas en BGG",
+      "items": [
+        "party / CTI: INSERT atómico al registrar sujeto; solo UPDATE de status ('ACTIVE'/'INACTIVE'); jamás DELETE físico para salvaguardar la identidad.",
+        "party_role / party_relationship: INSERT al asignar función o pactar garantía/ruta; UPDATE de end_date al cerrar vigencia; SELECT recursivo para avales.",
+        "credito: INSERT frecuente al originar y desembolsar microcrédito; UPDATE de estado ('VIGENTE' -> 'CANCELADO' / 'MOROSO').",
+        "pago: INSERT de alta frecuencia en la cobranza diaria de cuotas; SELECT SUM(monto_pagado) para saldos; inmutable por trazabilidad contable."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b5bcb69a-7ec2-4519-bdb8-b5830452b448",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/jose/UPN/base-datos-upn/docs/proyecto-final/02-modelo-datos/archify-estrella-bgg/candidate.json",
+  "output": "/home/jose/UPN/base-datos-upn/docs/proyecto-final/02-modelo-datos/archify-estrella-bgg/diagrama-estrella-bgg.html",
+  "specification": {
+    "sha256": "f9a2e2445cb7eb04f6cda0d991dad0a590dac3c8336a06f7e75691c7b2adefc4",
+    "bytes": 7997
+  },
+  "artifact": {
+    "sha256": "de00b7c16f4738c267215aca5b32f39434575e5c8cc35feea539cc929c53d2bb",
+    "bytes": 770179
+  }
+}
